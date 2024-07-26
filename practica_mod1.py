@@ -24,7 +24,7 @@ Define una constate llamada PI con el valor
 de 3.14159. Luego, solicita al usuario que ingrese el radio de un circulo.
 Utilizando la constante PI, calcula el area del cirulo
 (formula: area = PI * radio**2)
-Imprime un mensaje que indique el area culculada
+Imprime un mensaje que indique el area culculada 
 '''
 def area_PI(): # Creamos funcion 
     PI = 3.14159
@@ -32,3 +32,5 @@ def area_PI(): # Creamos funcion
     area = PI * radio**2
     print("El area del circulo es: ", area)
 area_PI()
+
+print("Hola")
