@@ -32,11 +32,3 @@ def area_PI(): # Creamos funcion
     area = PI * radio**2
     print("El area del circulo es: ", area)
 area_PI()
-
-print("Hola")
-
-#def mio():
-
-print("Hola mundo")
-
-# Prueba
