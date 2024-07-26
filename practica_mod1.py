@@ -34,3 +34,6 @@ def area_PI(): # Creamos funcion
 area_PI()
 
 print("Hola")
+
+def mio():
+    
