@@ -1,4 +1,5 @@
 #Práctica en el aula Mod-2
+
 # Calcula el año en el que la persona cumplirá 100 años.
 
 def cien_year(): # Creamos la Funcion cien_year
