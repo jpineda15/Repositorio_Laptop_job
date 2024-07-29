@@ -5,9 +5,9 @@
 def operadores():
         # Solicitamos la entrada de dos valores
     num_1 = int(input("Ingrese el Primer Valor: "))
-    if num_1 > 0:
+    if num_1:
         num_2 = int(input("Ingrese el Segundo Valor: "))
-        if num_2 > 0:
+        if num_2:
         # Realizamos las operaciones matemáticas correspondientes
             resul1 = num_1 + num_2
             resul2 = num_1 - num_2
@@ -25,9 +25,9 @@ def operadores():
             print(f"El Módulo (resto de la división) de  {num_1} % {num_2} = {resul6}")
             print(f"La Exponenciación de {num_1} ** {num_2} = {resul7}")
         else:
-            print(f"El segundo valor es menor o igual 0: {num_2}")
+            print(f"El segundo valor es 0")
     else:
-        print(f"El primer valor es menor o igual 0: {num_1}")
+        print(f"El primer valor es 0")
 
 # Llamamos la función operadores
 operadores()
