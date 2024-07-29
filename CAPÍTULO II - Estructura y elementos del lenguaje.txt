@@ -1,0 +1,10 @@
+Variables --> 
+Constantes
+Tipos de datos
+Operadores aritméticos
+Operadores relacionales
+Operadores lógicos
+Tipos de datos Complejos
+Identación
+Cometarios
+Encoding
