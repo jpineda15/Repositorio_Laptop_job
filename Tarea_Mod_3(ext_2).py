@@ -1,4 +1,15 @@
 # Tarea Mod-3(ext-2)
+"""
+    Crear una lista vacía que se llame colorList y haga lo siguiente:
+        -Insertar los siguientes colore (negro, azul, marrón, gris, verde, naranja, rosa, púrpura)
+        -Agregar el color Magenta
+        -Cambie el segundo valor, reemplazándolo con dos valores nuevos
+        -Devuelva el quinto, sexto y séptimo elemento
+        -Elimine el color marrón
+        -remueva el tercer elemento especificando el índice
+        -Imprima el número de elementos de la lista
+"""
+
 
 """
     Algoritmo Informal para los pasos que dieron durante el proceso de la lista colorList
@@ -22,12 +33,12 @@
 def colores():
     colorList = [] 
     colorList = ['negro', 'azul', 'marrón', 'gris', 'verde', 'naranja', 'rosa', 'púrpura']
-    colorList.append("Magenta")
+    colorList.append("Magenta") # usamos el método append() para agregar un elemento a lista. 
     print(colorList)
     
     new_color = ["Blanco", "Amarillo"] #-->nueva lista con valores a reemplazar. 
     indeX = colorList.index('marrón') #--> Almacenamos el Indice del valor a reemplazar. 
-    colorList = colorList[:indeX] + new_color + colorList[indeX + 1:]
+    colorList = colorList[:indeX] + new_color + colorList[indeX + 1:] # dividimos la cadena en dos los concatenamos | colorList[indeX + 1:] --> Esta parte contiene los elemento que están luego del que se va a reemplazar. 
     print(f"Lista Completa: {colorList}")
     
     print(f"Imprimir la Posición quinto, sexto y séptimo: {colorList[5:8]}")
