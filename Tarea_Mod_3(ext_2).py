@@ -1,32 +1,23 @@
 # Tarea Mod-3(ext-2)
 
-colorList = [] 
-colorList = ['negro', 'azul', 'marrón', 'gris', 'verde', 'naranja', 'rosa', 'púrpura']
-colorList.append("Magenta")
-print(f"Lista Completa: {colorList}")
-
-new_color = ["Blanco", "Amarillo"] #-->nueva lista con valores a reemplazar. 
-indeX = colorList.index('marrón') #--> Almacenamos el Indice del valor a reemplazar. 
-colorList = colorList[:indeX] + new_color + colorList[indeX + 1:]
-print(f"Lista Completa: {colorList}")
-
-colorlist = colorList[5:8]
-print(f"Los Colores quinto, sexto y séptimos: {colorlist}.")
-
-
-colorlist = ['negro', 'azul', 'marrón', 'gris', 'verde', 'naranja', 'rosa', 'púrpura']
-colorlist.remove("marrón") 
-print(f"Eliminamos el Color 'marrón': {colorlist}.")
-
-colorlist.pop(3)
-print(f"Remueva el tercer elemento especificando el índice: {colorlist}.")
-
-#colorlist = len(colorlist)
-print(f"Imprima el número de elementos de la lista: {len(colorlist)}")
-
-
-
-
+"""
+    Algoritmo Informal para los pasos que dieron durante el proceso de la lista colorList
+        1.  creamos la fusión colores(). 
+        2.  Creamos la lista colorList[]. 
+        3.  Insertamos una lista de elementos. 
+        4.  Agregamos el elemento "Magenta" a la lista colorList[]. 
+        5.  Imprimir colorList
+        6.  Creamos nueva lista new_color[]
+                Almacenamos el indice a reemplazar.
+                Divide y combina la lista para reemplazar el valor en index con new_values.
+                Imprimir nuevo resultado.
+        7.  Imprimir las posiciones Quinto, Sexto y Séptimo. 
+        8.  Eliminar el color marrón, que esta en el Index(2). 
+                El color marrón fue sustituido en el proceso 6 , estaremos tomando el color que lo sustituyo.
+        9.  Eliminar el elemento con indice 3
+        10. Imprimir el Total de los elementos de la lista colorList[]
+        11. Ejecutamos la fusión colores()
+"""
 
 def colores():
     colorList = [] 
@@ -39,15 +30,15 @@ def colores():
     colorList = colorList[:indeX] + new_color + colorList[indeX + 1:]
     print(f"Lista Completa: {colorList}")
     
-    colorlist.remove("marrón") # --> El color marrón fue removido, estaremos colocando el que lo sustituyo
-    #print(f"Eliminamos el Color 'marrón': {colorlist}.")
-    #listColor = " ," .join(colorList)
-    #print(f"Los Colores de Mi Lista: {listColor}.")
-    #cololist = colorList[5:8]
-    #colorlist = ", " .join(cololist) # Unir los elementos de colorList en una sola cadena, separados por comas y espacios.
+    print(f"Imprimir la Posición quinto, sexto y séptimo: {colorList[5:8]}")
     
-    #colorList = list(colorlist)
-    #colorList.remove("azul") # Eliminamos el segundo elemento de nuestra lista. 
+    colorList.remove("Blanco") # --> El color marrón fue removido, estaremos colocando el color que lo sustituyo
+    print(f"Eliminamos el Color 'marrón': {colorList}.")
     
+    colorList.pop(3)
+    print(f"Nuevo Valor lores: {colorList}")
+    
+    print(f"Total de Elementos de la Lista ColorList: {len(colorList)}")
+
 colores()
 

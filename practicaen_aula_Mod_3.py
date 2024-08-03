@@ -7,7 +7,7 @@ Venta de Alcohol:
 '''
 
 ''' 
-    Algoritmo Informal pra Verificar la edad y permitir la compra de Alcohol
+    Algoritmo Informal para Verificar la edad y permitir la compra de Alcohol
             1.  Imprimir "No vendemos Alcohol a Menores".
             2.  Dejar una linea en blanco: para mejor visualización.
             3.  Pedir al usuario que ingrese su edad y Convertir la edad a número entero.
