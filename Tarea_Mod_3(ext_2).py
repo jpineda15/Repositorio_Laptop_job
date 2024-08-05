@@ -52,4 +52,3 @@ def colores():
     print(f"Total de Elementos de la Lista ColorList: {len(colorList)}")
 
 colores()
-
