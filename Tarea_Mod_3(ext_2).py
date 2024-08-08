@@ -35,7 +35,7 @@ def colores():
     colorList = ['negro', 'azul', 'marrón', 'gris', 'verde', 'naranja', 'rosa', 'púrpura']
     colorList.append("Magenta") # usamos el método append() para agregar un elemento a lista. 
     print(colorList)
-    
+        
     new_color = ["Blanco", "Amarillo"] #-->nueva lista con valores a reemplazar. 
     indeX = colorList.index('marrón') #--> Almacenamos el Indice del valor a reemplazar. 
     colorList = colorList[:indeX] + new_color + colorList[indeX + 1:] # dividimos la cadena en dos los concatenamos | colorList[indeX + 1:] --> Esta parte contiene los elemento que están luego del que se va a reemplazar. 
@@ -46,7 +46,8 @@ def colores():
     colorList.remove("Blanco") # --> El color marrón fue removido, estaremos colocando el color que lo sustituyo
     print(f"Eliminamos el Color 'marrón': {colorList}.")
     
-    colorList.pop(3)
+    #colorList.pop(3)
+    del colorList[3] # Eliminamos el color con el indice 3 de la lista
     print(f"Nuevo Valor lores: {colorList}")
     
     print(f"Total de Elementos de la Lista ColorList: {len(colorList)}")
