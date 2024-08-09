@@ -12,9 +12,30 @@ estructurar tu programa de manera clara.
 
 def pedidos():
         print()
-        print("Bienvenido. Por favor, ingrese su solicitud.")
+        print("Bienvenido a Compras en Linea JFP.")
         print()
-        producto = input("¿Qué producto deseas pedir? ").upper()
+        producto = input("¿Ingrese el Nombre del Producto que desea? ").upper().strip()
         print()
-        cantidad = int(input(f"¿Cuántos '{producto}' deseas pedir? ")) 
+        cantidad = int(input(f"Por favor, Ingrese la Cantidad de '{producto}' que usted necesita? ")) 
+        if cantidad > 10: 
+                print("Su pedido se enviará mañana. La cantidad de artículos es mayor a 10.")
+        print()
+        pago = input("De sea Realizar el Pago (Si o No): ").upper().strip()
+        if pago == 'SI':
+                print()
+                envió = input("La compra es con envío a domicilio. (Si o No): ").upper().strip()
+                if envió == 'SI' and cantidad <= 10:
+                        print()
+                        print("El pedido ha sido pagado y enviado.")
+                elif pago == 'SI' and cantidad > 10:
+                        print()
+                        print("El pago ha sido realizado, pero el producto aún no ha sido enviado.")
+                else:
+                        print()
+                        print("El Pedido se Retirado en el Local.")
+        else:
+                print()
+                print("El pedido no ha sido pagado. Realice el pago para procesar el envío.")
+        print()
+        print("Gracias por Preferirnos.")
 pedidos()
