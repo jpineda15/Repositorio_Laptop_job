@@ -50,3 +50,5 @@ cadena2 = " ".join(map(str, combinación2))
 print("Primera combinación:", cadena1)
 print("Segunda combinación:", cadena2)
 
+
+
