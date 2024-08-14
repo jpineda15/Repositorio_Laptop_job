@@ -34,21 +34,54 @@ cadena2 = " ".join(map(str, lista2))
 print("Cadena original:", cadena1)
 print("Cadena ordenada:", cadena2)"""
 
-import random
+"""import random
 
 # Generar la primera combinación de 20 números aleatorios entre 1 y 80
-combinación1 = [random.randint(1, 80) for _ in range(20)]
+combinación1 = (random.randint(1, 80) for _ in range(10))
 
 # Generar una segunda combinación distinta de 20 números aleatorios entre 1 y 80
-combinación2 = [random.randint(1, 80) for _ in range(20)]
+combinación2 = (random.randint(1, 80) for _ in range(10))
+
+# Generar una tercera combinación distinta de 20 números aleatorios entre 1 y 80
+combinación3 = (random.randint(1, 80) for _ in range(10))
 
 # Convertir las listas en cadenas y unir los elementos
 cadena1 = " ".join(map(str, combinación1))
 cadena2 = " ".join(map(str, combinación2))
+cadena3 = " ".join(map(str, combinación3))
 
 # Imprimir las dos combinaciones
 print("Primera combinación:", cadena1)
 print("Segunda combinación:", cadena2)
+print("Segunda combinación:", cadena3)"""
 
 
 
+import random
+
+def generar_combinación(excluidos):
+    combinación = set()
+    while len(combinación) < 10:
+        num = random.randint(1, 80)
+        if num not in excluidos:
+            combinación.add(num)
+    return combinación
+
+# Generar la primera combinación de 10 números aleatorios entre 1 y 80
+combinación1 = generar_combinación(set())
+
+# Generar una segunda combinación distinta, sin repetir números de la primera
+combinación2 = generar_combinación(combinación1)
+
+# Generar una tercera combinación distinta, sin repetir números de la primera y segunda
+combinación3 = generar_combinación(combinación1.union(combinación2))
+
+# Convertir los conjuntos en cadenas y unir los elementos
+cadena1 = " ".join(map(str, combinación1))
+cadena2 = " ".join(map(str, combinación2))
+cadena3 = " ".join(map(str, combinación3))
+
+# Imprimir las combinaciones
+print("Primera combinación:", cadena1)
+print("Segunda combinación:", cadena2)
+print("Tercera combinación:", cadena3)
