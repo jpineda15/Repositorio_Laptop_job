@@ -78,6 +78,15 @@ Operan en binarios de los números.
 
                     while --> Repite un bloque de condigo mientras una condición sea verdadera.
 
-10-)
+10-) Las funciones:
+         Son un conjunto de instrucciones reutilizables que realizan una tarea específica.
+            
+            Ej: 
+                def nombre(parámetros):
+                    sentencias 
+                    return 
+               
+
+
 
 
