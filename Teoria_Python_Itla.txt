@@ -1,0 +1,83 @@
+1-) Operadores Aritméticos:
+Se usan para realizar operaciones matemáticas básicas.
+
+    + : Suma
+    - : Resta
+    * : Multiplicación
+    / : División
+    % : Módulo (resto de la división)
+    ** : Exponente (potencia)
+    // : División entera (trunca el resultado a un entero)
+
+2-) Operadores de Asignación:
+Se usan para asignar valores a variables.
+
+    = : Asignación simple
+    += : Suma y asigna
+    -= : Resta y asigna
+    *= : Multiplica y asigna
+    /= : Divide y asigna
+    %= : Módulo y asigna
+    **= : Exponente y asigna
+    //= : División entera y asigna
+
+3-) Operadores de Comparación:
+Se utilizan para comparar valores, y devuelven True o False.
+
+    == : Igual a
+    != : Diferente de
+    > : Mayor que
+    < : Menor que
+    >= : Mayor o igual que
+    <= : Menor o igual que
+
+4-) Operadores Lógicos
+Se usan para combinar expresiones condicionales.
+
+    and : Devuelve True si ambas condiciones son verdaderas
+    or : Devuelve True si al menos una condición es verdadera
+    not : Invierte el valor lógico (de True a False y viceversa)
+
+5-) Operadores de Identidad:
+Se utilizan para comparar objetos y verificar si ocupan la misma posición en la memoria.
+
+    is : Devuelve True si ambos objetos son el mismo
+    is not : Devuelve True si ambos objetos no son el mismo
+
+7-) Operadores de Pertenencia
+Se usan para verificar si un valor o variable se encuentra en una secuencia (como una lista, tupla, o cadena).
+
+in : Devuelve True si el valor está en la secuencia
+not in : Devuelve True si el valor no está en la secuencia
+
+8-)  Operadores Bit a Bit (Bitwise)
+Operan en binarios de los números.
+
+    & : AND bit a bit
+    | : OR bit a bit
+    ^ : XOR bit a bit
+    ~ : NOT bit a bit
+    << : Desplazamiento a la izquierda
+    >> : Desplazamiento a la derecha
+
+
+9-) Estructuras de control de flujo:
+
+        A-) Las Estructuras Selectivas o Estructuras Condicionales:
+            Se utilizan para ejecutar diferentes bloques de código en función de ciertas condiciones. 
+                Las más comunes son:
+                    if 
+                    elif 
+                    else
+            
+        B-) Bucles o Ciclos (for, while):
+            Esto se utilizan para repetir un bloque de código varias veces.
+                    
+                    for --> Este bucle se utiliza cuando conocemos de antemano el número de veces que queremos
+                            que se repita una acción o bloque de código.
+
+                    while --> Repite un bloque de condigo mientras una condición sea verdadera.
+
+10-)
+
+
