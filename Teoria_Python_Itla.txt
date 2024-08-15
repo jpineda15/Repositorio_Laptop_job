@@ -1,65 +1,64 @@
 1-) Operadores Aritméticos:
-Se usan para realizar operaciones matemáticas básicas.
+    Se usan para realizar operaciones matemáticas básicas.
 
-    + : Suma
-    - : Resta
-    * : Multiplicación
-    / : División
-    % : Módulo (resto de la división)
-    ** : Exponente (potencia)
-    // : División entera (trunca el resultado a un entero)
+        + : Suma
+        - : Resta
+        * : Multiplicación
+        / : División
+        % : Módulo (resto de la división)
+        ** : Exponente (potencia)
+        // : División entera (trunca el resultado a un entero)
 
 2-) Operadores de Asignación:
-Se usan para asignar valores a variables.
+    Se usan para asignar valores a variables.
 
-    = : Asignación simple
-    += : Suma y asigna
-    -= : Resta y asigna
-    *= : Multiplica y asigna
-    /= : Divide y asigna
-    %= : Módulo y asigna
-    **= : Exponente y asigna
-    //= : División entera y asigna
+        = : Asignación simple
+        += : Suma y asigna
+        -= : Resta y asigna
+        *= : Multiplica y asigna
+        /= : Divide y asigna
+        %= : Módulo y asigna
+        **= : Exponente y asigna
+        //= : División entera y asigna
 
 3-) Operadores de Comparación:
-Se utilizan para comparar valores, y devuelven True o False.
+    Se utilizan para comparar valores, y devuelven True o False.
 
-    == : Igual a
-    != : Diferente de
-    > : Mayor que
-    < : Menor que
-    >= : Mayor o igual que
-    <= : Menor o igual que
+        == : Igual a
+        != : Diferente de
+        > : Mayor que
+        < : Menor que
+        >= : Mayor o igual que
+        <= : Menor o igual que
 
 4-) Operadores Lógicos
-Se usan para combinar expresiones condicionales.
+    Se usan para combinar expresiones condicionales.
 
-    and : Devuelve True si ambas condiciones son verdaderas
-    or : Devuelve True si al menos una condición es verdadera
-    not : Invierte el valor lógico (de True a False y viceversa)
+        and : Devuelve True si ambas condiciones son verdaderas
+        or : Devuelve True si al menos una condición es verdadera
+        not : Invierte el valor lógico (de True a False y viceversa)
 
 5-) Operadores de Identidad:
-Se utilizan para comparar objetos y verificar si ocupan la misma posición en la memoria.
+    Se utilizan para comparar objetos y verificar si ocupan la misma posición en la memoria.
 
-    is : Devuelve True si ambos objetos son el mismo
-    is not : Devuelve True si ambos objetos no son el mismo
+        is : Devuelve True si ambos objetos son el mismo
+        is not : Devuelve True si ambos objetos no son el mismo
 
 7-) Operadores de Pertenencia
-Se usan para verificar si un valor o variable se encuentra en una secuencia (como una lista, tupla, o cadena).
+    Se usan para verificar si un valor o variable se encuentra en una secuencia (como una lista, tupla, o cadena).
 
-in : Devuelve True si el valor está en la secuencia
-not in : Devuelve True si el valor no está en la secuencia
+        in : Devuelve True si el valor está en la secuencia
+        not in : Devuelve True si el valor no está en la secuencia
 
-8-)  Operadores Bit a Bit (Bitwise)
-Operan en binarios de los números.
+8-) Operadores Bit a Bit (Bitwise)
+    Operan en binarios de los números.
 
-    & : AND bit a bit
-    | : OR bit a bit
-    ^ : XOR bit a bit
-    ~ : NOT bit a bit
-    << : Desplazamiento a la izquierda
-    >> : Desplazamiento a la derecha
-
+        & : AND bit a bit
+        | : OR bit a bit
+        ^ : XOR bit a bit
+        ~ : NOT bit a bit
+        << : Desplazamiento a la izquierda
+        >> : Desplazamiento a la derecha
 
 9-) Estructuras de control de flujo:
 
@@ -86,7 +85,18 @@ Operan en binarios de los números.
                     sentencias 
                     return 
                
+11-) Módulo:
+        Es un archivo que contiene código (como funciones, clases y variables) 
+        que se puede reutilizar en otros programas.
 
+            import  --> Se utiliza para incluir (importar)
+                        un módulo en tu script para poder utilizar su código.
+                            
+                            Ej: import math 
+
+            from    --> Permite importar funciones, clases, o variables específicas de un módulo.
+                            
+                            Ej: from math import ...
 
 
 
