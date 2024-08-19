@@ -1,3 +1,17 @@
+    Tipo de Datos:
+
+        STRING(str):
+            'Hola Mundo' o "Hola Mundo"
+
+        INTEGER(int):
+            -10 o 42 
+
+        FLOAT(float):
+            3.1415 o -10.0
+
+        BOOLEAN(bool)
+            TRUE o FALSE
+
 1-) Operadores Aritméticos:
         Se usan para realizar operaciones matemáticas básicas.
 
@@ -21,7 +35,7 @@
             **= : Exponente y asigna
             //= : División entera y asigna
 
-3-) Operadores de Comparación:
+3-) Operadores de Comparación: 
         Se utilizan para comparar valores, y devuelven True o False.
 
             == : Igual a
@@ -31,7 +45,7 @@
             >= : Mayor o igual que
             <= : Menor o igual que
 
-4-) Operadores Lógicos
+4-) Operadores Lógicos: Se utilizan para combinar valores booleanos.
         Se usan para combinar expresiones condicionales.
 
             and : Devuelve True si ambas condiciones son verdaderas
