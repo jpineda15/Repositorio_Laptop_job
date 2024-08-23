@@ -112,6 +112,6 @@
                             
                             Ej: from math import ...
 
-12-) 
+12-)  Tipo de argumentos 
 
 
