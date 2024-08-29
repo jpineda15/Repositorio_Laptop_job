@@ -142,11 +142,14 @@
                 replace(old, new): Reemplaza todas las ocurrencias de old por new.
 
 
-13-) Listas
-    
-    Sintaxis -->    Las lista se definen utilizando corchetes `[]` y los elementos están separados por comas.
+13-) Listas:
                 
-                Ej: mi_lista = [1, 2, 3, 4, 5] 
+    
+    Sintaxis -->    Las lista se definen utilizando corchetes `[]` o la función `list()` y los elementos están separados por comas.
+                
+                Ej: 
+                    my_lista = [1, 2, 3, 4, 5]
+                    mi_lista = list([1, 2, 3, 4, 5])
     
     Indices -->     Las lista en Python son indexadas, lo que significa que puedes acceder a los elementos 
                     por su posición. Los indices empiezan en 0.
@@ -192,4 +195,20 @@
                                             print(contador)
                                             contador += 1
 
-    Ordenación: 
+    Ordenación:
+                    sort() -->  ordena la lista en su lugar, es decir, modifica la lista original.
+                                No devuelve nada: Devuelve None, por lo que no se puede asignar el resultado a una nueva variable.
+                        
+                        Ej: my_lista.sort()
+
+                    sorted() -->    devuelve una nueva lista que está ordenada, mientras que la lista original permanece sin cambios.
+                                    Devuelve una nueva lista: Puedes asignar el resultado a una nueva variable.
+
+                        sorted(my_lista) --> Ordenación simple.
+
+                        sorted(my_lista, reverse = True) --> Ordena inversa.
+
+            Diferencia:
+                        sort(): Modifica la lista en su lugar y no devuelve nada.
+                        sorted(): Devuelve una nueva lista ordenada sin modificar la original.
+
