@@ -151,6 +151,7 @@
                     my_lista = [1, 2, 3, 4, 5]
                     mi_lista = list([1, 2, 3, 4, 5])
     
+    
     Indices -->     Las lista en Python son indexadas, lo que significa que puedes acceder a los elementos 
                     por su posición. Los indices empiezan en 0.
                 
@@ -162,11 +163,13 @@
                 Ej: mi_lista = [1, 2, 3, 4, 5]
                     print(mi_lista[-1]) Imprime '5'
 
+    
     Valores -->     En una lista pueden ser de cualquier tipo de dato (números, cadenas, objetos, etc.). 
                     Las listas también pueden contener otros tipos de listas (listas anidadas).  
 
                 Ej:  mi_lista = [1, "texto", [3, 4], True]
    
+    
     Azar -->        Para seleccionar elementos aleatorios de una lista, puedes usar el módulo random. 
 
                 Ej: 
@@ -212,3 +215,21 @@
                         sort(): Modifica la lista en su lugar y no devuelve nada.
                         sorted(): Devuelve una nueva lista ordenada sin modificar la original.
 
+
+    Modificar Listas:
+
+            mi_lista[1] = 25 --> Asignar un nuevo valor a un índice.
+            
+            mi_lista.append(60) -->  Agrega un elemento al fina.
+
+            mi_lista.extend([70, 80]) --> Agrega todos los elementos de un iterable (como otra lista) al final.
+
+            mi_lista.insert(1, 15) --> Inserta un elemento en una posición específica.
+
+    Eliminar elementos:
+
+            mi_lista.remove(25) --> Elimina la primera ocurrencia de un valor.
+
+            ultimo = mi_lista.pop() --> Elimina y devuelve un elemento en el índice especificado (por defecto, el último).
+
+            del mi_lista[2] --> Elimina un elemento o un slice.
