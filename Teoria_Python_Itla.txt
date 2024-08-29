@@ -146,6 +146,10 @@
 
                 title() --> se utiliza para convertir la primera letra de cada palabra en una cadena a mayúscula y todas las demás letras a minúscula.
 
+                find() --> se utiliza para buscar una palabra en una cadena de texto.
+
+                count() --> se utiliza para contar la cantidad exacta que se repite cualquier frase, palabra y letra en una cadena.
+
 
 13-) Listas:
                 
