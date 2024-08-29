@@ -98,7 +98,24 @@
                 def nombre(parámetros):
                     sentencias 
                     return 
-               
+
+        Parámetros --> son las variables que recibe una función.
+            
+            Tipos de Parámetros:
+                                    Parámetros Posicionales: 
+                                        Son los parámetros que se pasan a la función en el 
+                                        orden en que están definidos.
+
+                                    Parámetros con Valor por Defecto: 
+                                        Puedes asignar valores por defecto a los parámetros,
+                                        que se usarán si no se proporciona un argumento para 
+                                        esos parámetros.
+
+                                    Parámetros por Palabra Clave:
+
+        Argumentos --> son los valores que se asigna a una función. 
+        
+
 11-) Módulo:
         Es un archivo que contiene código (como funciones, clases y variables) 
         que se puede reutilizar en otros programas.
@@ -115,3 +132,54 @@
 12-)  Tipo de argumentos 
 
 
+13-) Listas
+    
+    Sintaxis -->    Las lista se definen utilizando corchetes `[]` y los elementos están separados por comas.
+                
+                Ej: mi_lista = [1, 2, 3, 4, 5] 
+    
+    Indices -->     Las lista en Python son indexadas, lo que significa que puedes acceder a los elementos 
+                    por su posición. Los indices empiezan en 0.
+                
+                Ej: mi_lista = [1, 2, 3, 4, 5]
+                    print(mi_lista[0]) Imprime '1'
+
+                    También puedes usar indices negativos para acceder a los elementos desde el final de la lista:
+
+                Ej: mi_lista = [1, 2, 3, 4, 5]
+                    print(mi_lista[-1]) Imprime '5'
+
+    Valores -->     En una lista pueden ser de cualquier tipo de dato (números, cadenas, objetos, etc.). 
+                    Las listas también pueden contener otros tipos de listas (listas anidadas).  
+
+                Ej:  mi_lista = [1, "texto", [3, 4], True]
+   
+    Azar -->        Para seleccionar elementos aleatorios de una lista, puedes usar el módulo random. 
+
+                Ej: 
+
+                import random
+                    mi_lista = [1, 2, 3, 4, 5]
+                    elemento_aleatorio = random.choice(mi_lista)
+                    print(elemento_aleatorio)
+
+
+    Técnicas de iteración -->   Son métodos para recorrer secuencias de datos, como listas, tuplas, diccionarios,
+                                conjuntos, y otros objetos iterables.
+
+                                El bucle for es una de las formas más comunes de iterar sobre una secuencia en Python. 
+
+                                    Ej: 
+                                        frutas = ['manzana', 'banana', 'cereza']
+                                        for fruta in frutas:
+                                            print(fruta)
+                                
+                                El bucle while se usa cuando deseas iterar mientras se cumple una condición.
+
+                                    Ej: 
+                                        contador = 0
+                                        while contador < 3:
+                                            print(contador)
+                                            contador += 1
+
+    Ordenación: 
