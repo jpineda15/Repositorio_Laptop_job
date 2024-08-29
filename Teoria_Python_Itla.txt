@@ -137,9 +137,14 @@
             Métodos para Manipulación de Cadenas de Texto:
 
                 lower() --> convierte todos los caracteres a minúsculas.
+
                 upper() --> convierte todos los caracteres a mayúsculas.
+
                 strip() --> Elimina los espacios en blanco al principio y al final de la cadena.
-                replace(old, new): Reemplaza todas las ocurrencias de old por new.
+
+                replace(old, new)--> Reemplaza todas las ocurrencias de old por new.
+
+                title() --> se utiliza para convertir la primera letra de cada palabra en una cadena a mayúscula y todas las demás letras a minúscula.
 
 
 13-) Listas:
