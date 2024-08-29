@@ -129,7 +129,17 @@
                             
                             Ej: from math import ...
 
-12-)  Tipo de argumentos 
+
+
+12-)        Sintaxis de Cadenas de :
+                Las cadenas en Python se definen entre comillas simples ('), dobles ("), o triples (''' o """ para cadenas multilínea).  
+
+            Métodos para Manipulación de Cadenas de Texto:
+
+                lower() --> convierte todos los caracteres a minúsculas.
+                upper() --> convierte todos los caracteres a mayúsculas.
+                strip() --> Elimina los espacios en blanco al principio y al final de la cadena.
+                replace(old, new): Reemplaza todas las ocurrencias de old por new.
 
 
 13-) Listas
