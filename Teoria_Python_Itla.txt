@@ -131,7 +131,7 @@
 
 
 
-12-)       strings --> Sintaxis de Cadenas de :
+12-)    Funciones de Cadenas (strings):
                 Las cadenas en Python se definen entre comillas simples ('), dobles ("), o triples (''' o """ para cadenas multilínea).  
 
             Métodos para Manipulación de Cadenas de Texto:
@@ -149,6 +149,8 @@
                 find() --> se utiliza para buscar una palabra en una cadena de texto.
 
                 count() --> se utiliza para contar la cantidad exacta que se repite cualquier frase, palabra y letra en una cadena.
+
+
 
 
 13-) Listas:
