@@ -150,6 +150,8 @@
 
                 count() --> se utiliza para contar la cantidad exacta que se repite cualquier frase, palabra y letra en una cadena.
 
+                isnumeric() --> Valida si el contenido de una variable es numérico.
+
 
 
 
@@ -246,3 +248,12 @@
             ultimo = mi_lista.pop() --> Elimina y devuelve un elemento en el índice especificado (por defecto, el último).
 
             del mi_lista[2] --> Elimina un elemento o un slice.
+
+14-) Tuplas:
+            Es una estructura de datos propia de Python que permite almacenar distinto tipos de valores, son inmutables: No cambian una vez inicializadas.
+
+                Ej:
+                    my_tupla = (1, 2, 3)
+                    my_tupla2 = (1, "Hola", 3.3, True, 4t)
+                    my_tupla3 = (1, 2, 3, (0, 'Mundo', 4))
+
