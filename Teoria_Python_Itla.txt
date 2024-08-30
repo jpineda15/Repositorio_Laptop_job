@@ -131,7 +131,7 @@
 
 
 
-12-)        Sintaxis de Cadenas de :
+12-)       strings --> Sintaxis de Cadenas de :
                 Las cadenas en Python se definen entre comillas simples ('), dobles ("), o triples (''' o """ para cadenas multilínea).  
 
             Métodos para Manipulación de Cadenas de Texto:
@@ -234,6 +234,8 @@
             mi_lista.extend([70, 80]) --> Agrega todos los elementos de un iterable (como otra lista) al final.
 
             mi_lista.insert(1, 15) --> Inserta un elemento en una posición específica.
+
+            len() --> 
 
     Eliminar elementos:
 
