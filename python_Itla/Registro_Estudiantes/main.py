@@ -24,3 +24,53 @@ print("#########################################################################
 
 # llamamos esta función y pasamos la lista estudiantes
 procesar_estudiantes(estudiantes)
+
+
+"""
+Tarea Mod-7
+    Registro de Estudiantes - Modularizado
+
+    Crea una lista que contenga diccionarios representando estudiantes. Cada diccionario debe contener información como:
+    nombre, edad, curso y promedio de calificaciones. Luego, utiliza un bucle para recorrer la lista e imprimir la información de cada estudiante.
+
+Ojo a los detalles:
+    -Debes estar Modularizado por los archivos(funciones.py y main.py)
+    -En funciones.py debes crear dos funciones (imprimir_información_estudiante y
+    procesar_estudiantes).
+    -La función imprimir_información_estudiante debe recibir un parámetro (estudiante)
+    e imprimir cada registro o diccionario.
+    -La función procesar_estudiantes debe recibir un parámetro(estudiante)
+    y recorrer la lista completa llamando a la imprimir_información_estudiante
+    para mostrarlo
+    -En main.py debe importar solo la función a utilizar, no el módulo completo
+    -Pasar por lo menos 5 diccionarios
+
+
+Registro de Estudiantes (Algoritmo Informal):
+
+    Archivo main.py
+
+        1.	Importar las Funciones a utilizar:
+                A.	imprimir_información_estudiante
+                B.	procesar_estudiantes
+        2.	Se creo una lista:
+                A.	estudiantes: esta almacena Varios diccionarios.
+                    a.	Nombre, Edad, Curso, Promedio de Calificaciones.
+        3.	Se creo un bucle for para iterar la lista:
+                A.	Formateamos la información que nos facilita el bucle en cada vuelta.
+                B.	Asignamos esa información a una variable.
+                C.	Llamamos la función: 
+                    a.	imprimir_información_estudiante(): pasar parámetro(variable con información formateada)
+        4.	Llamamos la función: procesar_estudiantes(estudiantes) y pasar parámetro(lista con diccionario).
+
+    Archivo funciones.py
+
+        1.	Se creo una función:
+                A.	imprimir_información_estudiante(estudiante): esta función recibe un parámetro.
+                    a.	Imprimir el argumento que recibe.	
+        2.	Se creo una función:
+                A.	procesar_estudiantes(estudiantes): esta función recibe un parámetro.
+                    a.	 Creamos un bucle for para iterar los argumento recibido.
+                        1.	Llamamos la función imprimir_información_estudiante(estudiante)
+
+"""
