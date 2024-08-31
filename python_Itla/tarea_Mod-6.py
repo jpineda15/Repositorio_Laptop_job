@@ -8,7 +8,7 @@ Crea un archivo de texto llamado datos.txt que contenga una sola frase, como por
 2) Leer el Archivo:
 
 Abre el archivo datos.txt en modo lectura.
-Lee el contenido del archivo y almacénalo en una variable.
+Lee el contenido del archivo y almacenarlo en una variable.
 3) Manipular la Cadena de Texto:
 
 Convierte toda la cadena a mayúsculas.
