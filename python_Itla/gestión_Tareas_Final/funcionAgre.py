@@ -2,6 +2,12 @@ from datetime import datetime, timedelta # Importamos la clase datetime & timede
 """
     datetime -->Esta clase se utiliza para manejar fechas y horas. Proporciona métodos para obtener la fecha y hora actual.
     timedelta -->Esta clase representa una duración o diferencia entre dos fechas o tiempos. Se utiliza para realizar operaciones aritméticas con fechas y horas, como sumar o restar días, horas, minutos, segundos, etc., a un objeto datetime.
+
+"""
+id_Tareas = 1 # Declaramos una variable global. 
+"""
+Agrega una variable global para el contador de IDs: 
+Puedes definir una variable fuera de la función agregarTarea() para mantener el estado del contador.
 """
 
 # Función para control de error al ingresar de valores por teclado
@@ -23,6 +29,8 @@ def solicitar_input(mensaje, tipo_dato): # mensaje --> Muestra el mensaje del in
 # Agregar Tareas
 def agregarTarea():
     
+    global id_Tareas  # Usar el contador global
+    
     tareAg = {}
     
     fech_Creada = datetime.now() # Obtenemos la Fecha de Creación de la tarea
@@ -42,7 +50,7 @@ def agregarTarea():
             
             for c in range(0, numTarea): # tengo duda validar
                 
-                nom_Tarea = input("Título de la Tarea:") # Ingresar titulo de la tarea
+                nom_Tarea = input("Título de la Tarea: ") # Ingresar titulo de la tarea
                 
                 if nom_Tarea in tareAg: # si se cumple obviara todo lo siguiente y iniciara nuevamente el bucle for
                     print(f"La tarea '{nom_Tarea}' ya existe")
@@ -83,7 +91,7 @@ def agregarTarea():
                 est_Tarea = solicitar_input("Selecciona una opción (1-5): ",int) # Menu de Estado
                 
                 
-                tareAg[nom_Tarea] = {
+                tareAg[id_Tareas] = {
                     'Título': nom_Tarea,
                     'Descripción': desc_Tarea,
                     'Fecha de Vencimiento': fech_Vence.strftime('%Y-%m-%d %H:%M:%S'),
@@ -92,10 +100,13 @@ def agregarTarea():
                     'Estado': est_Tarea, #[est_Tarea - 1].split('. ')[1] if 1 <= est_Tarea <= 5 else 'Desconocido',
                     'Fecha de Creación': fech_Creada.strftime('%Y-%m-%d %H:%M:%S'),
                 }
-                print(f"Tarea '{nom_Tarea}' añadida correctamente.")
+                
+                id_Tareas += 1 # Incrementar el contador. 
+                #print(f"Tarea '{nom_Tarea}' con '{id_Tareas}' fue añadida correctamente.")
+                print(tareAg)
+            break # Salir del bucle una vez que se hayan agregado las tareas
         else:
             print("Por favor, Ingresar un Valor Mayor que 0.")
-            #est_Tarea = solicitar_input("Por Favor ingres un valor Mayor a 0: ", int)
 '''    
     tareAg = { # OJO el ID o contador_ID debe corregirlo 
         'Titulo' : nom_Tarea,
@@ -109,3 +120,10 @@ def agregarTarea():
 '''
 
 agregarTarea()
+
+"""
+1- id_contador: Variable global que se usa para asignar un ID único a cada tarea.
+2- global id_contador: Se declara dentro de la función para modificar la variable global.
+3- tareAg[id_contador]: Utiliza id_contador como clave en el diccionario para asegurar que cada tarea tenga un ID único.
+4- id_contador += 1: Incrementa el contador después de agregar una tarea.
+"""

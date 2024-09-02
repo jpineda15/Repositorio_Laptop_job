@@ -1,3 +1,5 @@
+import 
+
 '''def hola(mensaje, tipo_dato=int):
     contador = 0
     intentos=3
