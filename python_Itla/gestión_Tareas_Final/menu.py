@@ -1,3 +1,6 @@
+
+
+
 # Menu 
 def menuInicio():
     menu =[
@@ -27,7 +30,7 @@ def menuInicio():
             print(f"El valor ingresado no es valida. Tienes {contador} intento de {intento}. Por favor, ingresa un número del 1 al 5.") 
             
             if contador >= intento: # condición para salir del sistema por intento fallido
-                print("Has superado el número máximo de intentos. Saliendo del programa...")
+                print("Has alcanzado el número máximo de intentos. El sistema se cerrará...")
                 break
             continue
         
