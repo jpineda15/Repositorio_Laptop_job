@@ -1,4 +1,4 @@
-import 
+from pymongo import 
 
 '''def hola(mensaje, tipo_dato=int):
     contador = 0
