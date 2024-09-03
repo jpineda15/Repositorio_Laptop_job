@@ -1,11 +1,17 @@
 from datetime import datetime, timedelta # Importamos la clase datetime & timedelta
-import 
-"""
-    datetime -->Esta clase se utiliza para manejar fechas y horas. Proporciona métodos para obtener la fecha y hora actual.
-    timedelta -->Esta clase representa una duración o diferencia entre dos fechas o tiempos. Se utiliza para realizar operaciones aritméticas con fechas y horas, como sumar o restar días, horas, minutos, segundos, etc., a un objeto datetime.
 
-"""
-id_Tareas = 1 # Declaramos una variable global. 
+from pymongo import MongoClient  # Importar el cliente de MongoDB para conectarse al servidor
+
+client = MongoClient('mongodb://localhost:27017') # Conectar al servidor de MongoDB
+
+db = client['Gestión_de_Tareas'] # Seleccionar la base de datos
+
+
+
+# Seleccionar la colección
+dbTabla = db['TablaGESTION']
+
+#id_Tareas = 1 # Declaramos una variable global. 
 """
 Agrega una variable global para el contador de IDs: 
 Puedes definir una variable fuera de la función agregarTarea() para mantener el estado del contador.
@@ -30,7 +36,7 @@ def solicitar_input(mensaje, tipo_dato): # mensaje --> Muestra el mensaje del in
 # Agregar Tareas
 def agregarTarea():
     
-    global id_Tareas  # Usar el contador global
+    #global id_Tareas  # Usar el contador global
     
     tareAg = {}
     
@@ -92,33 +98,31 @@ def agregarTarea():
                 est_Tarea = solicitar_input("Selecciona una opción (1-5): ",int) # Menu de Estado
                 
                 
-                tareAg[id_Tareas] = {
+                tareAg= {
                     'Título': nom_Tarea,
                     'Descripción': desc_Tarea,
                     'Fecha de Vencimiento': fech_Vence.strftime('%Y-%m-%d %H:%M:%S'),
-                    'Prioridad': prio_Tarea, #[prio_Tarea - 1].split('. ')[1] if 1 <= prio_Tarea <= 3 else 'Desconocida',
-                    'Categoría': cate_Tarea, #[cate_Tarea - 1].split('. ')[1] if 1 <= cate_Tarea <= 6 else 'Desconocida',
-                    'Estado': est_Tarea, #[est_Tarea - 1].split('. ')[1] if 1 <= est_Tarea <= 5 else 'Desconocido',
+                    'Prioridad': prio_Tarea, 
+                    'Categoría': cate_Tarea, 
+                    'Estado': est_Tarea, 
                     'Fecha de Creación': fech_Creada.strftime('%Y-%m-%d %H:%M:%S'),
                 }
                 
-                id_Tareas += 1 # Incrementar el contador. 
+                #id_Tareas += 1 # Incrementar el contador. 
                 #print(f"Tarea '{nom_Tarea}' con '{id_Tareas}' fue añadida correctamente.")
-                print(tareAg)
+                #print(tareAg)
             break # Salir del bucle una vez que se hayan agregado las tareas
         else:
             print("Por favor, Ingresar un Valor Mayor que 0.")
-'''    
-    tareAg = { # OJO el ID o contador_ID debe corregirlo 
-        'Titulo' : nom_Tarea,
-        'Descripción' : desc_Tarea,
-        'Fecha de Vencimiento' : fech_Vence.strftime('%Y-%m-%d %H:%M:%S'), #La fecha límite para completar la tarea
-        'Prioridad' : prio_Tarea, #Nivel de urgencia de la tarea (por ejemplo, baja, media, alta)
-        'Categoría' :cate_Tarea, # Opciones para clasificar la tarea dentro de una o más categorías (por ejemplo, "Trabajo", "Personal", "Urgente"). Esto facilita el filtrado y la organización de las tareas.
-        'Estado' : opción03, # Estado actual de la tarea (por ejemplo, pendiente, en progreso, completada, Terminada).
-        'Fecha de Creación' : fech_Creada.strftime('%Y-%m-%d %H:%M:%S'), # Fecha de creación 
-        }
-'''
+    try:
+        dbTabla.insert_one(tareAg)
+        print(f'Documento insertado con ID específico: {tareAg["_id"]}')
+    except Exception as e:
+        print(f'Error al insertar documento: {e}')
+    
+    # Insertar el diccionario en la colección
+    #resultado = dbTabla.insert(tareAg)
+    
 
 agregarTarea()
 
@@ -127,4 +131,9 @@ agregarTarea()
 2- global id_contador: Se declara dentro de la función para modificar la variable global.
 3- tareAg[id_contador]: Utiliza id_contador como clave en el diccionario para asegurar que cada tarea tenga un ID único.
 4- id_contador += 1: Incrementa el contador después de agregar una tarea.
+"""
+
+"""
+    datetime -->Esta clase se utiliza para manejar fechas y horas. Proporciona métodos para obtener la fecha y hora actual.
+    timedelta -->Esta clase representa una duración o diferencia entre dos fechas o tiempos. Se utiliza para realizar operaciones aritméticas con fechas y horas, como sumar o restar días, horas, minutos, segundos, etc., a un objeto datetime.
 """
