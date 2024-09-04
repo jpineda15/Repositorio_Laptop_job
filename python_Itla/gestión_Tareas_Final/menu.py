@@ -4,7 +4,7 @@
 # Menu 
 def menuInicio():
     menu =[
-        "Menu Gestión de Tareas:",
+        "Gestión de Tareas:",
         '1. Agregar Tareas.',
         '2. Actualizar Tareas.',
         '3. Consultar Tareas.',

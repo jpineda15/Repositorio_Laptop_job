@@ -33,6 +33,18 @@ def solicitar_input(mensaje, tipo_dato): # mensaje --> Muestra el mensaje del in
     print("Has alcanzado el número máximo de intentos. El sistema se cerrará...")
 
 
+# Obtener un Id
+ultimo_doc = dbTabla.find_one(sort=[('_id', -1)])
+
+if ultimo_doc and isinstance(ultimo_doc['_id'], str) and ultimo_doc['_id'].startswith('GT-'):
+    ultimo_id = ultimo_doc['_id']
+    ultimo_numero = int(ultimo_id.split('-')[1])
+    nuevo_numero = ultimo_numero + 1
+else:
+    nuevo_numero = 1
+nuevo_id = f'GT-{nuevo_numero:02d}'
+
+
 # Agregar Tareas
 def agregarTarea():
     
@@ -59,7 +71,7 @@ def agregarTarea():
                 
                 nom_Tarea = input("Título de la Tarea: ") # Ingresar titulo de la tarea
                 
-                if nom_Tarea in tareAg: # si se cumple obviara todo lo siguiente y iniciara nuevamente el bucle for
+                if nom_Tarea in tareAg: # si se cumple obviara todo lo siguiente y iniciara nuevamente el bucle for ( OJO ahi que buscar como hacer consulta en la tabla)
                     print(f"La tarea '{nom_Tarea}' ya existe")
                     continue 
                 
@@ -67,12 +79,24 @@ def agregarTarea():
                 
                 prio_Tarea = [
                     'Prioridades de las Tareas: ',
-                    '1. Alta',
-                    '2. Media',
-                    '3. Baja'
+                    '1. Alta', #Tareas críticas que deben ser atendidas inmediatamente.
+                    '2. Media', #Tareas importantes, pero que no requieren atención inmediata.
+                    '3. Baja', #Tareas que pueden esperar o que no tienen una urgencia particular.
+                    '4. Crítica' #Tareas que son absolutamente esenciales y que, si no se completan, pueden tener un impacto significativo en el proyecto o negocio.
                 ]
                 print('\n'.join(prio_Tarea)) # formateamos la salida de la lista 
                 prio_Tarea = solicitar_input("Selecciona una opción (1-3): ",int) # Menu de Prioridad
+                if prio_Tarea == 1:
+                    prio_Tarea = "Alta"
+                elif prio_Tarea == 2:
+                    prio_Tarea = "Media"
+                elif prio_Tarea == 3:
+                    prio_Tarea = 'Baja'
+                elif prio_Tarea == 4:
+                    prio_Tarea = 'Crítica'
+                else:
+                    print(f"El numero {prio_Tarea} no es una opción, por favor Selecciona una opción (1-3): ")
+                
                 
                 cate_Tarea =[
                     "Característica de las Tareas: ",
@@ -85,7 +109,23 @@ def agregarTarea():
                 ]
                 print('\n'.join(cate_Tarea))# formateamos la salida de la lista
                 cate_Tarea = solicitar_input("Selecciona una opción (1-6): ",int) # Menu de Categoría
+                if cate_Tarea == 1:
+                    cate_Tarea = "Trabajo"
+                elif cate_Tarea == 2:
+                    cate_Tarea = 'Personal'
+                elif cate_Tarea == 3:
+                    cate_Tarea = 'Urgente'
+                elif cate_Tarea == 4:
+                    cate_Tarea = 'Estudios'
+                elif cate_Tarea == 5:
+                    cate_Tarea = 'Hogar'
+                elif cate_Tarea == 6:
+                    cate_Tarea = 'Finanzas'
+                else:
+                    print(f"El numero {prio_Tarea} no es una opción, por favor Selecciona una opción (1-6): ")
                 
+                '''Todas las tarea agregada deben tener el estado Pendiente | En el campo Update van los demás 
+                campo y una condición que cuando se cumpla la fecha de vencimiento cambie de esta y se termine
                 est_Tarea = [
                     "Estado de las Tareas: ",
                     '1. Pendiente', # La tarea aún no ha comenzado.
@@ -96,17 +136,27 @@ def agregarTarea():
                 ]
                 print('\n'.join(est_Tarea))# formateamos la salida de la lista
                 est_Tarea = solicitar_input("Selecciona una opción (1-5): ",int) # Menu de Estado
+                if est_Tarea == 1:
+                    est_Tarea = 'Pendiente'
+                elif est_Tarea == 2:
+                    est_Tarea = 'En Progreso'
+                elif est_Tarea == 3:
+                    est_Tarea = 'En Espera'
+                elif est_Tarea == 4:
+                    est_Tarea = 'Completada'
+                elif est_Tarea == 5:
+                    est_Tarea = 'Cancelada' '''
                 
-                
-                tareAg= {
+                tareAg = {
+                    '_id' : nuevo_id,
                     'Título': nom_Tarea,
                     'Descripción': desc_Tarea,
                     'Fecha de Vencimiento': fech_Vence.strftime('%Y-%m-%d %H:%M:%S'),
                     'Prioridad': prio_Tarea, 
                     'Categoría': cate_Tarea, 
-                    'Estado': est_Tarea, 
-                    'Fecha de Creación': fech_Creada.strftime('%Y-%m-%d %H:%M:%S'),
-                }
+                    'Estado': 'Pendiente', 
+                    'Fecha de Creación': fech_Creada.strftime('%Y-%m-%d %H:%M:%S')
+                } 
                 
                 #id_Tareas += 1 # Incrementar el contador. 
                 #print(f"Tarea '{nom_Tarea}' con '{id_Tareas}' fue añadida correctamente.")
@@ -122,7 +172,6 @@ def agregarTarea():
     
     # Insertar el diccionario en la colección
     #resultado = dbTabla.insert(tareAg)
-    
 
 agregarTarea()
 
