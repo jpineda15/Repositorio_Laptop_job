@@ -33,8 +33,8 @@ def solicitar_input(mensaje, tipo_dato): # mensaje --> Muestra el mensaje del in
     print("Has alcanzado el número máximo de intentos. El sistema se cerrará...")
 
 
-# Obtener un Id
-ultimo_doc = dbTabla.find_one(sort=[('_id', -1)])
+'''# Generar un ID (Ej: GT-01)
+ultimo_doc = dbTabla.find_one(sort=[('_id', -1)]) # Buscamos el últimos documento en la DB
 
 if ultimo_doc and isinstance(ultimo_doc['_id'], str) and ultimo_doc['_id'].startswith('GT-'):
     ultimo_id = ultimo_doc['_id']
@@ -42,8 +42,21 @@ if ultimo_doc and isinstance(ultimo_doc['_id'], str) and ultimo_doc['_id'].start
     nuevo_numero = ultimo_numero + 1
 else:
     nuevo_numero = 1
-nuevo_id = f'GT-{nuevo_numero:02d}'
+nuevo_id = f'GT-{nuevo_numero:02d}'''
 
+
+ultimo_doc = dbTabla.find_one(sort=[('_id', -1)]) # Obtener el ultimo _Id insertado ingresado en la DB
+
+if ultimo_doc: # Validar si existe un Id
+    if isinstance(ultimo_doc['_id'], str): # Validar si el Campo _Id es un str
+        if ultimo_doc['_id'].startswith('GT-'): # Validar si el campo "_Id" inicia con 'GT-'
+            # Extrae el último ID y obtiene el número después de 'GT-' convirtiéndolo a entero.
+            ultimo_id = ultimo_doc['_id']
+            ultimo_numero = int(ultimo_id.split('-')[1])
+            ultimo_numero += 1 # Incrementa el número para generar el nuevo ID.
+else:
+    new_num = 1 # Si no existe un "_id", establecemos una variable con un valor inicial = 1
+    nuevo_id = f'GT-{new_num:02d}' # Crear el Nuevo _ID con el formato "GT-xx", asegurando que siempre tenga al menos dos dígitos.
 
 # Agregar Tareas
 def agregarTarea():
