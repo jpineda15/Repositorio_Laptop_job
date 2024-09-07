@@ -20,11 +20,17 @@ def solicitar_input(mensaje, tipo_dato): # mensaje --> Muestra el mensaje del in
             return valor
         except ValueError:
             contador += 1
-            print(f"El valor ingresado no es válido. Te quedan {intentos - contador} intento(s). Por favor, ingresa un valor correcto.")
-    print("Has alcanzado el número máximo de intentos. El sistema se cerrará...")
+            print(f"\n El valor ingresado no es válido. Te quedan {intentos - contador} intento(s). Por favor, ingresa un valor correcto.")
+        #break
+        #print("Has alcanzado el número máximo de intentos. El sistema se cerrará...")
+        
+        if contador == intentos:
+            print("\n Has alcanzado el número máximo de intentos. El sistema se cerrará...")
+            return None
+            break
 
 
-# Función que crea un Id unico con la Año/mes/dia/Hora:Minutos
+# Función que crea un Id unció con la Año/mes/dia/Hora:Minutos
 def genera_id():
     tiempoId = datetime.now().strftime('%y%m%d%H%M')
     nuevo_id = f'GT-{tiempoId}'
@@ -74,6 +80,8 @@ def agregarTarea():
                     prio_Tarea = 'Baja'
                 elif prio_Tarea == 4:
                     prio_Tarea = 'Crítica'
+                elif prio_Tarea is None:
+                    pass
                 else:
                     print(f"El numero {prio_Tarea} no es una opción, por favor Selecciona una opción (1-3): ")
                 
@@ -101,6 +109,8 @@ def agregarTarea():
                     cate_Tarea = 'Hogar'
                 elif cate_Tarea == 6:
                     cate_Tarea = 'Finanzas'
+                elif cate_Tarea is None:
+                    pass
                 else:
                     print(f"El numero {prio_Tarea} no es una opción, por favor Selecciona una opción (1-6): ")
                 
@@ -144,10 +154,12 @@ def agregarTarea():
                 except Exception as e:
                     print(f'Error al insertar documento: {e}')
             break # Salir del bucle una vez que se hayan agregado las tareas
+        elif numTarea is None : # todas la funcion devuelven un valor y no quiero que NOne salga en ninguno de los print
+            pass
         else:
             print("Por favor, Ingresar un Valor Mayor que 0.")
 
-agregarTarea()
+#agregarTarea()
 
 """
 1- id_contador: Variable global que se usa para asignar un ID único a cada tarea.

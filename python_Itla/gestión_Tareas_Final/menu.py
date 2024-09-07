@@ -1,7 +1,8 @@
-
+from funcionAgre import solicitar_input, agregarTarea
+#import funcionAgre
 
 def menuInicio():
-    menu =[
+    menu = [
         "\n**** --- Gestión de Tareas --- ****\n",
         '1. Agregar Tareas.',
         '2. Actualizar Tareas.',
@@ -10,46 +11,26 @@ def menuInicio():
         '5. Salir de Sistema.'
     ]
     menu = '\n'.join(menu)
-    print(f"{menu}")
     
-    # Agregar validador de errores por si ingresan str
-    
-    contador = 0
-    contador2 = 0
-    intento = 3
     
     while True:
-        #opción = solicitar_input("Selecciona una opción (1-5): ", int) 
-        #opción = solicitar_input("Selecciona una opción (1-5): ", int) 
-        # Control de error si se ingresa un valor no permitido
-        '''try:
-            opción = int(input("Selecciona una opción (1-5): "))
-        except ValueError:
-            contador += 1
-            print(f"El valor ingresado no es valida. Tienes {contador} intento de {intento}. Por favor, ingresa un número del 1 al 5.") 
-            
-            if contador >= intento: # condición para salir del sistema por intento fallido
-                print("Has alcanzado el número máximo de intentos. El sistema se cerrará...")
-                break
-            continue
-        
-        contador2 += 1'''
+        print(f"{menu}")
+        opción = solicitar_input("\n Selecciona una opción (1-5): ", int)
         
         if opción == 1:
-            pass #Agregar función que agregue tarea
+            agregarTarea() # Funcion para agregar Tarea
         elif opción == 2:
-            pass #Función que actualice tarea existente
+            pass  # Función que actualice tarea existente
         elif opción == 3:
-            pass #Función que Consulte el listado de Tareas
+            pass  # Función que consulte el listado de tareas
         elif opción == 4:
-            pass ##Función que borre tarea existente
+            pass  # Función que borre tarea existente
         elif opción == 5:
             print("Saliendo del programa...")
             break
-        elif contador2 >= intento:
-                print(f"Usted tiene {intento} Intento, Ingresando un Valor Incorrecto: {str(opción)}")
-                break
+        elif opción is None:
+            pass
         else:
-                print(f"La opción no válida: {opción}. Por favor, selecciona una opción válida.\n")
+            print(f"La opción no válida: {opción}. Por favor, selecciona una opción válida.\n")
 
-menuInicio()
+#menuInicio()
