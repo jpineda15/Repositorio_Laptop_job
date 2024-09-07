@@ -1,10 +1,8 @@
 
 
-
-# Menu 
 def menuInicio():
     menu =[
-        "Gestión de Tareas:",
+        "\n**** --- Gestión de Tareas --- ****\n",
         '1. Agregar Tareas.',
         '2. Actualizar Tareas.',
         '3. Consultar Tareas.',
@@ -21,9 +19,10 @@ def menuInicio():
     intento = 3
     
     while True:
-        
+        #opción = solicitar_input("Selecciona una opción (1-5): ", int) 
+        #opción = solicitar_input("Selecciona una opción (1-5): ", int) 
         # Control de error si se ingresa un valor no permitido
-        try:
+        '''try:
             opción = int(input("Selecciona una opción (1-5): "))
         except ValueError:
             contador += 1
@@ -34,7 +33,7 @@ def menuInicio():
                 break
             continue
         
-        contador2 += 1
+        contador2 += 1'''
         
         if opción == 1:
             pass #Agregar función que agregue tarea
@@ -53,3 +52,4 @@ def menuInicio():
         else:
                 print(f"La opción no válida: {opción}. Por favor, selecciona una opción válida.\n")
 
+menuInicio()

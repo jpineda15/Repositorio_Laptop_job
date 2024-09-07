@@ -2,23 +2,14 @@ from datetime import datetime, timedelta # Importamos la clase datetime & timede
 
 from pymongo import MongoClient  # Importar el cliente de MongoDB para conectarse al servidor
 
+
+# Conexión a MongoDB
 client = MongoClient('mongodb://localhost:27017') # Conectar al servidor de MongoDB
-
 db = client['Gestión_de_Tareas'] # Seleccionar la base de datos
+dbTabla = db['TablaGESTION'] # Seleccionar la colección(Tabla)
 
 
-
-# Seleccionar la colección
-dbTabla = db['TablaGESTION']
-
-#id_Tareas = 1 # Declaramos una variable global. 
-"""
-Agrega una variable global para el contador de IDs: 
-Puedes definir una variable fuera de la función agregarTarea() para mantener el estado del contador.
-"""
-
-# Función para control de error al ingresar de valores por teclado
-
+# Función para control de error al ingresar valores por teclado
 def solicitar_input(mensaje, tipo_dato): # mensaje --> Muestra el mensaje del input | tipo_dato --> recibe el valor ingresado
     contador =0
     intentos = 3
@@ -33,35 +24,15 @@ def solicitar_input(mensaje, tipo_dato): # mensaje --> Muestra el mensaje del in
     print("Has alcanzado el número máximo de intentos. El sistema se cerrará...")
 
 
-'''# Generar un ID (Ej: GT-01)
-ultimo_doc = dbTabla.find_one(sort=[('_id', -1)]) # Buscamos el últimos documento en la DB
+# Función que crea un Id unico con la Año/mes/dia/Hora:Minutos
+def genera_id():
+    tiempoId = datetime.now().strftime('%y%m%d%H%M')
+    nuevo_id = f'GT-{tiempoId}'
+    return nuevo_id
 
-if ultimo_doc and isinstance(ultimo_doc['_id'], str) and ultimo_doc['_id'].startswith('GT-'):
-    ultimo_id = ultimo_doc['_id']
-    ultimo_numero = int(ultimo_id.split('-')[1])
-    nuevo_numero = ultimo_numero + 1
-else:
-    nuevo_numero = 1
-nuevo_id = f'GT-{nuevo_numero:02d}'''
-
-
-ultimo_doc = dbTabla.find_one(sort=[('_id', -1)]) # Obtener el ultimo _Id insertado ingresado en la DB
-
-if ultimo_doc: # Validar si existe un Id
-    if isinstance(ultimo_doc['_id'], str): # Validar si el Campo _Id es un str
-        if ultimo_doc['_id'].startswith('GT-'): # Validar si el campo "_Id" inicia con 'GT-'
-            # Extrae el último ID y obtiene el número después de 'GT-' convirtiéndolo a entero.
-            ultimo_id = ultimo_doc['_id']
-            ultimo_numero = int(ultimo_id.split('-')[1])
-            ultimo_numero += 1 # Incrementa el número para generar el nuevo ID.
-else:
-    new_num = 1 # Si no existe un "_id", establecemos una variable con un valor inicial = 1
-    nuevo_id = f'GT-{new_num:02d}' # Crear el Nuevo _ID con el formato "GT-xx", asegurando que siempre tenga al menos dos dígitos.
 
 # Agregar Tareas
 def agregarTarea():
-    
-    #global id_Tareas  # Usar el contador global
     
     tareAg = {}
     
@@ -70,25 +41,21 @@ def agregarTarea():
     
     while True:
         # llamamos la función solicitar_input y solicitar el ingreso de la cantidad de tarea a crear.
-        numTarea = solicitar_input("Indique la Cantidad de Tarea desea Agregar: ", int) 
+        numTarea = solicitar_input("\n Indique la Cantidad de Tarea desea Agregar: ", int) 
         
-        # Agregar todos que se se ingresa por teclado al diccionario tareAg (OJO)
-        """
         
-        """
-        if numTarea is not None and numTarea > 0: # No comparar TypeError(None) y Mayor que 0
+        if numTarea is not None and numTarea > 0: # Validamos que el valor ingresado sea mayor a 0 y que sea un valor none.
             
-            print("---Agregando Nueva Tareas---")
-            
-            for c in range(0, numTarea): # tengo duda validar
+            for c in range(0, numTarea): # iterar la variable iniciando en 0 (OjO)
                 
-                nom_Tarea = input("Título de la Tarea: ") # Ingresar titulo de la tarea
+                print("---Agregando Nueva Tareas---")
+                nom_Tarea = input("Título de la Tarea: ").lower() # Ingresar titulo de la tarea
                 
                 if nom_Tarea in tareAg: # si se cumple obviara todo lo siguiente y iniciara nuevamente el bucle for ( OJO ahi que buscar como hacer consulta en la tabla)
                     print(f"La tarea '{nom_Tarea}' ya existe")
                     continue 
                 
-                desc_Tarea = input("Ingrese una Breve descripción de la Tarea: ") # Ingresar una descripción de la tarea
+                desc_Tarea = input("Ingrese una Breve descripción de la Tarea: ").lower() # Ingresar una descripción de la tarea
                 
                 prio_Tarea = [
                     'Prioridades de las Tareas: ',
@@ -115,8 +82,8 @@ def agregarTarea():
                     "Característica de las Tareas: ",
                     '1. Trabajo', #Tareas relacionadas con el empleo, proyectos laborales, reuniones, etc.
                     '2. Personal', #Actividades personales como citas médicas, eventos familiares, o autocuidado. 
-                    '3. Urgente ', #Tareas que requieren atención inmediata o de alta prioridad.
-                    '4. Estudios ', #Tareas relacionadas con la educación, como exámenes, deberes o proyectos académicos.
+                    '3. Urgente', #Tareas que requieren atención inmediata o de alta prioridad.
+                    '4. Estudios', #Tareas relacionadas con la educación, como exámenes, deberes o proyectos académicos.
                     '5. Hogar', #Actividades relacionadas con el mantenimiento del hogar, como limpieza, reparaciones o compras domésticas.
                     '6. Finanzas' #Tareas relacionadas con la gestión de dinero, pagos, presupuestos, etc.
                 ]
@@ -161,7 +128,7 @@ def agregarTarea():
                     est_Tarea = 'Cancelada' '''
                 
                 tareAg = {
-                    '_id' : nuevo_id,
+                    '_id' : genera_id(),
                     'Título': nom_Tarea,
                     'Descripción': desc_Tarea,
                     'Fecha de Vencimiento': fech_Vence.strftime('%Y-%m-%d %H:%M:%S'),
@@ -171,20 +138,14 @@ def agregarTarea():
                     'Fecha de Creación': fech_Creada.strftime('%Y-%m-%d %H:%M:%S')
                 } 
                 
-                #id_Tareas += 1 # Incrementar el contador. 
-                #print(f"Tarea '{nom_Tarea}' con '{id_Tareas}' fue añadida correctamente.")
-                #print(tareAg)
+                try: # investigar try 
+                    dbTabla.insert_one(tareAg)
+                    print(f'Documento insertado con ID específico: {tareAg["_id"]}')
+                except Exception as e:
+                    print(f'Error al insertar documento: {e}')
             break # Salir del bucle una vez que se hayan agregado las tareas
         else:
             print("Por favor, Ingresar un Valor Mayor que 0.")
-    try:
-        dbTabla.insert_one(tareAg)
-        print(f'Documento insertado con ID específico: {tareAg["_id"]}')
-    except Exception as e:
-        print(f'Error al insertar documento: {e}')
-    
-    # Insertar el diccionario en la colección
-    #resultado = dbTabla.insert(tareAg)
 
 agregarTarea()
 
