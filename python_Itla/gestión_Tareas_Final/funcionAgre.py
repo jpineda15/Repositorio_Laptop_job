@@ -54,8 +54,8 @@ def agregarTarea():
             
             for c in range(0, numTarea): # iterar la variable iniciando en 0 (OjO)
                 
-                print("---Agregando Nueva Tareas---")
-                nom_Tarea = input("Título de la Tarea: ").lower() # Ingresar titulo de la tarea
+                print("\n ---Agregando Nueva Tareas---")
+                nom_Tarea = input("\n Título de la Tarea: ").lower() # Ingresar titulo de la tarea
                 
                 if nom_Tarea in tareAg: # si se cumple obviara todo lo siguiente y iniciara nuevamente el bucle for ( OJO ahi que buscar como hacer consulta en la tabla)
                     print(f"La tarea '{nom_Tarea}' ya existe")
@@ -114,29 +114,7 @@ def agregarTarea():
                 else:
                     print(f"El numero {prio_Tarea} no es una opción, por favor Selecciona una opción (1-6): ")
                 
-                '''Todas las tarea agregada deben tener el estado Pendiente | En el campo Update van los demás 
-                campo y una condición que cuando se cumpla la fecha de vencimiento cambie de esta y se termine
-                est_Tarea = [
-                    "Estado de las Tareas: ",
-                    '1. Pendiente', # La tarea aún no ha comenzado.
-                    '2. En Progreso', # La tarea está en proceso de realización.
-                    '3. En Espera',#La tarea está en pausa o esperando información adicional.
-                    '4. Completada',#La tarea ha sido finalizada y está completa.
-                    '5. Cancelada' # La tarea ha sido cancelada y no se completará.
-                ]
-                print('\n'.join(est_Tarea))# formateamos la salida de la lista
-                est_Tarea = solicitar_input("Selecciona una opción (1-5): ",int) # Menu de Estado
-                if est_Tarea == 1:
-                    est_Tarea = 'Pendiente'
-                elif est_Tarea == 2:
-                    est_Tarea = 'En Progreso'
-                elif est_Tarea == 3:
-                    est_Tarea = 'En Espera'
-                elif est_Tarea == 4:
-                    est_Tarea = 'Completada'
-                elif est_Tarea == 5:
-                    est_Tarea = 'Cancelada' '''
-                
+        
                 tareAg = {
                     '_id' : genera_id(),
                     'Título': nom_Tarea,
