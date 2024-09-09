@@ -1,14 +1,16 @@
 from funcionAgre import solicitar_input, agregarTarea
+from leerTareas import mostrar_registros
 #import funcionAgre
 
 def menuInicio():
     menu = [
         "\n**** --- Gestión de Tareas --- ****\n",
         '1. Agregar Tareas.',
-        '2. Actualizar Tareas.',
-        '3. Consultar Tareas.',
-        '4. Eliminar Tareas.',
-        '5. Salir de Sistema.'
+        '2. Leer Tareas.',
+        '3. Actualizar Tareas.',
+        '4. Consultar Tareas.',
+        '5. Eliminar Tareas.',
+        '6. Salir de Sistema.'
     ]
     menu = '\n'.join(menu)
     
@@ -20,12 +22,14 @@ def menuInicio():
         if opción == 1:
             agregarTarea() # Funcion para agregar Tarea
         elif opción == 2:
-            pass  # Función que actualice tarea existente
+            mostrar_registros() # Leer y filtrar tarea almacenada 
         elif opción == 3:
-            pass  # Función que consulte el listado de tareas
+            pass  # Función que actualice tarea existente
         elif opción == 4:
-            pass  # Función que borre tarea existente
+            pass  # Función que consulte el listado de tareas
         elif opción == 5:
+            pass  # Función que borre tarea existente
+        elif opción == 6:
             print("Saliendo del programa...")
             break
         elif opción is None:
