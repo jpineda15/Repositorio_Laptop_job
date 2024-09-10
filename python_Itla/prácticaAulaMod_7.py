@@ -35,7 +35,7 @@ print(f'El promedio de los valores de la lista es: {promedio}')
 5) Buscar un Número en la Lista:
     Solicita al usuario un número y verifica si ese número se encuentra en la lista.
     Informa al usuario si el número está o no en la lista."""
-new_list = sorted(numAle())
+new_list = sorted(numeroAleatorios)
 num = int(input("Ingrese un numero del 1 al 50: "))
 if num in new_list:
     print(f"El numero {num}, esta en la Lista: {new_list}")

@@ -27,7 +27,7 @@ def solicitar_input(mensaje, tipo_dato): # mensaje --> Muestra el mensaje del in
         if contador == intentos:
             print("\n Has alcanzado el número máximo de intentos. El sistema se cerrará...")
             return None
-            break
+            exit()
 
 
 # Función que crea un Id unció con la Año/mes/dia/Hora:Minutos
@@ -47,10 +47,10 @@ def agregarTarea():
     
     while True:
         # llamamos la función solicitar_input y solicitar el ingreso de la cantidad de tarea a crear.
-        numTarea = solicitar_input("\n Indique la Cantidad de Tarea desea Agregar: ", int) 
+        numTarea = solicitar_input("\nIndique la cantidad de tareas que desea agregar. Para volver al inicio, ingrese 0: ", int) 
         
         
-        if numTarea is not None and numTarea > 0: # Validamos que el valor ingresado sea mayor a 0 y que sea un valor none.
+        if numTarea is not None: #and numTarea > 0: # Validamos que el valor ingresado sea mayor a 0 y que sea un valor none.
             
             for c in range(0, numTarea): # iterar la variable iniciando en 0 (OjO)
                 
@@ -70,6 +70,7 @@ def agregarTarea():
                     '3. Baja', #Tareas que pueden esperar o que no tienen una urgencia particular.
                     '4. Crítica' #Tareas que son absolutamente esenciales y que, si no se completan, pueden tener un impacto significativo en el proyecto o negocio.
                 ]
+                
                 print('\n'.join(prio_Tarea)) # formateamos la salida de la lista 
                 prio_Tarea = solicitar_input("Selecciona una opción (1-3): ",int) # Menu de Prioridad
                 if prio_Tarea == 1:
@@ -114,7 +115,6 @@ def agregarTarea():
                 else:
                     print(f"El numero {prio_Tarea} no es una opción, por favor Selecciona una opción (1-6): ")
                 
-        
                 tareAg = {
                     '_id' : genera_id(),
                     'Título': nom_Tarea,
@@ -134,8 +134,11 @@ def agregarTarea():
             break # Salir del bucle una vez que se hayan agregado las tareas
         elif numTarea is None : # todas la funcion devuelven un valor y no quiero que NOne salga en ninguno de los print
             pass
+        elif opción == 0:
+            break
         else:
-            print("Por favor, Ingresar un Valor Mayor que 0.")
+            #print("Por favor, Ingresar un Valor Mayor que 0.")
+            break
 
 #agregarTarea()
 

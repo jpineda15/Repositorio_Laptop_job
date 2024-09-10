@@ -17,7 +17,7 @@ def menuInicio():
     
     while True:
         print(f"{menu}")
-        opción = solicitar_input("\n Selecciona una opción (1-5): ", int)
+        opción = solicitar_input("\n Selecciona una opción (1-6) :" , int)
         
         if opción == 1:
             agregarTarea() # Funcion para agregar Tarea
