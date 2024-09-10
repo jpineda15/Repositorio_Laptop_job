@@ -50,7 +50,7 @@ def agregarTarea():
         numTarea = solicitar_input("\nIndique la cantidad de tareas que desea agregar. Para volver al inicio, ingrese 0: ", int) 
         
         
-        if numTarea is not None: #and numTarea > 0: # Validamos que el valor ingresado sea mayor a 0 y que sea un valor none.
+        if numTarea is not None and numTarea > 0: # Validamos que el valor ingresado sea mayor a 0 y que sea un valor none.
             
             for c in range(0, numTarea): # iterar la variable iniciando en 0 (OjO)
                 
@@ -134,7 +134,7 @@ def agregarTarea():
             break # Salir del bucle una vez que se hayan agregado las tareas
         elif numTarea is None : # todas la funcion devuelven un valor y no quiero que NOne salga en ninguno de los print
             pass
-        elif opción == 0:
+        elif numTarea == 0:
             break
         else:
             #print("Por favor, Ingresar un Valor Mayor que 0.")
