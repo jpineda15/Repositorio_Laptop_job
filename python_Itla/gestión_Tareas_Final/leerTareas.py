@@ -68,9 +68,3 @@ def mostrar_registros():
         else:
             print(f"\n No hay tareas con prioridad asignada como: '{filtro_Tarea}'.")
 
-
-
-
-
-# Ejemplo de uso
-#mostrar_registros()

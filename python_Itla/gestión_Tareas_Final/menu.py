@@ -1,6 +1,6 @@
 from funcionAgre import agregarTarea
 from leerTareas import mostrar_registros
-#from upadateTarea import actualizarTarea
+from upadateTarea import actualizarTarea
 
 def menuInicio():
     menu = [
@@ -19,7 +19,7 @@ def menuInicio():
         try:
             opción = int(input("\nSelecciona una opción (1-4). Para Salir Ingrese 0: "))
         except ValueError:
-            print("Por favor ingresa un número válido.")
+            print("\nPor favor ingresa un número válido.")
             continue
         
         
@@ -28,17 +28,16 @@ def menuInicio():
         elif opción == 2:
             mostrar_registros() # Leer y filtrar tarea almacenada 
         elif opción == 3:
-            pass
+            actualizarTarea()
         elif opción == 4:
             pass  # Función que consulte el listado de tareas
         elif opción == 5:
             pass  # Función que borre tarea existente
         elif opción == 0:
             print("Saliendo del programa...")
-            break
-        elif opción is None:
-            pass
+            return 'Sistema Cerrado..'
+            break 
         else:
             print(f"La opción no válida: {opción}. Por favor, selecciona una opción válida.\n")
 
-#menuInicio()
+

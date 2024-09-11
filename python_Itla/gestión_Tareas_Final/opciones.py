@@ -92,6 +92,7 @@ def estadoF():
         except ValueError:
             print("\nPor favor ingresa un número válido.")
             continue
+        
         if statu == 1:
             return 'En Progreso'
         elif statu == 2:

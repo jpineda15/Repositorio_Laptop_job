@@ -32,18 +32,15 @@ def agregarTarea():
             print("Por favor ingresa un número válido.")
             continue
         
-        if numTarea is not None and numTarea > 0: # Validamos que el valor ingresado sea mayor a 0 y que sea un valor none.
+        if numTarea > 0: 
             
-            for c in range(0, numTarea): # iterar la variable iniciando en 0 (OjO)
+            for c in range(0, numTarea): # iterar la variable iniciando en 0 
                 
                 print("\n ---Agregando Nueva Tareas---")
+                
                 nom_Tarea = input("\n Título de la Tarea: ").lower() # Ingresar titulo de la tarea
                 
-                if nom_Tarea in tareAg: # si se cumple obviara todo lo siguiente y iniciara nuevamente el bucle for ( OJO ahi que buscar como hacer consulta en la tabla)
-                    print(f"La tarea '{nom_Tarea}' ya existe")
-                    continue 
-                
-                desc_Tarea = input("Ingrese una Breve descripción de la Tarea: ").lower() # Ingresar una descripción de la tarea
+                desc_Tarea = input("\nIngrese una Breve descripción de la Tarea: ").lower() # Ingresar una descripción de la tarea
                 
                 prio_Tarea = prioridadF() # Llamos la funcion de las Prioridades
                 
@@ -61,20 +58,20 @@ def agregarTarea():
                     'Fecha de Creación': fech_Creada.strftime('%Y-%m-%d %H:%M:%S')
                 } 
                 
-                try: # investigar try 
+                try: # Se maneja cualquier error que pueda surgir en el proceso de insertar el Id 
                     dbTabla.insert_one(tareAg)
-                    print(f'Documento insertado con ID específico: {tareAg["_id"]}')
+                    print(f'\nDocumento insertado con ID específico: {tareAg["_id"]}')
                 except Exception as e:
-                    print(f'Error al insertar documento: {e}')
+                    print(f'\nError al insertar documento: {e}')
             
         elif numTarea == 0:
             print("Saliendo...")
-            return "Sisteme Cerrado.."
+            return "Sistema Cerrado.."
             break
         else:
-            print("El número ingresado no es una opción válida. Intenta nuevamente.")
+            print("\nEl número ingresado no es una opción válida. Intenta nuevamente.")
 
-#agregarTarea()
+
 
 """
 1- id_contador: Variable global que se usa para asignar un ID único a cada tarea.
