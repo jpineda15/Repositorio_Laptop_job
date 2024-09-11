@@ -1,6 +1,12 @@
 from datetime import datetime, timedelta # Importamos la clase datetime & timedelta
 from pymongo import MongoClient  # Importar el cliente de MongoDB para conectarse al servidor
 from opciones import prioridadF, categoríaF # type: ignore
+import sqlite3
+
+try:
+    my_conexion = sqlite3.connect("database/gestiorTarea")
+except Exception as ex:
+    print(ex)
 
 # Conexión a MongoDB
 client = MongoClient('mongodb://localhost:27017') # Conectar al servidor de MongoDB
@@ -51,11 +57,11 @@ def agregarTarea():
                     '_id' : genera_id(),
                     'Título': nom_Tarea,
                     'Descripción': desc_Tarea,
-                    'Fecha de Vencimiento': fech_Vence.strftime('%Y-%m-%d %H:%M:%S'),
+                    'Fecha_Vencimiento': fech_Vence.strftime('%Y-%m-%d %H:%M:%S'),
                     'Prioridad': prio_Tarea, 
                     'Categoría': cate_Tarea, 
                     'Estado': 'Pendiente', 
-                    'Fecha de Creación': fech_Creada.strftime('%Y-%m-%d %H:%M:%S')
+                    'Fecha_Creación': fech_Creada.strftime('%Y-%m-%d %H:%M:%S')
                 } 
                 
                 try: # Se maneja cualquier error que pueda surgir en el proceso de insertar el Id 
