@@ -43,6 +43,8 @@ def mostrar_registros():
     while True:
         filtro_Tarea = prioridadF() # Llamos la funcion de las Prioridades
         
+        if filtro_Tarea == "Sisteme Cerrado..":
+            break
         registros = list(dbTabla.find({'Prioridad': filtro_Tarea}).limit(5)) # Consultamso la Prioridad selecionada 
         
         if len(registros) > 0: # Verificamos si hay registros

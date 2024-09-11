@@ -69,5 +69,10 @@ def actualizarTarea():
             actuli = {'$set': {campo: valor}} # Crea el diccionario de actualización
             resultado = dbTabla.update_one(busca, actuli)
             
-            print('\n', formato, '\n')
-actualizarTarea()
+        resultado = dbTabla.find(busca)
+        for documento in resultado:
+            formato = [f"{clave}: {valor}" for clave, valor in documento.items()]
+            formato = '\n'.join(formato)
+            print('\n Vista actualizada: \n', formato, '\n')
+        break
+#actualizarTarea()
