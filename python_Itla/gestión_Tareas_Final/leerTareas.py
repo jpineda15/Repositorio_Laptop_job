@@ -1,5 +1,5 @@
-from opciones import prioridadF, categoríaF # type: ignore
-import sqlite3
+from opciones import prioridadF # Del módulo opciones.py importamos la Funcion prioridadF 
+import sqlite3 # Importa el módulo sqlite3 para trabajar con bases de datos SQLite
 
 # Ruta de la base de datos
 ruta_db = "PythonGit/python_Itla/gestión_Tareas_Final/database/gestorTarea.db"
@@ -11,6 +11,7 @@ cursor = None
 
 
 def vistaGeneral():
+    
     # Conectar a la base de datos SQLite
     my_conexión = sqlite3.connect(ruta_db, timeout=10)
     my_conexión.row_factory = sqlite3.Row # Acceso a resultados por nombre de columna
@@ -21,6 +22,7 @@ def vistaGeneral():
     consulta = "SELECT _id, Título, Descripción, Fecha_Vencimiento, Prioridad, Categoría, Estado, Fecha_Creación FROM GESTION LIMIT 5"
     
     try:
+        # Ejecutar consulta
         cursor.execute(consulta)
         registros = cursor.fetchall()
         
@@ -50,13 +52,14 @@ def vistaGeneral():
     except sqlite3.Error as e:
         print(f"Error al consultar en la base de datos: {e}")
     finally:
-        # Cerrar la conexión
-        my_conexión.close()
-
+    # Cerrar el cursor y la conexión a la base de datos si están abiertos
+        if cursor:
+            cursor.close()
+        if my_conexión:
+            my_conexión.close()
 
 
 def mostrar_registros():
-    
     vistaGeneral()
     
     # Conectar a la base de datos SQLite
@@ -64,43 +67,47 @@ def mostrar_registros():
     my_conexión.row_factory = sqlite3.Row
     cursor = my_conexión.cursor()
     
-    while True:
+    try: # Usamos este bloque (try...finally) para asegurar el cierre de la conexión, incluso si ocurre un error.
         
-        filtro_Tarea = prioridadF()  # Llamamos la función de las Prioridades
-        
-        if filtro_Tarea == "Sistema Cerrado..":
-            break
-        
-        query = """
-        SELECT _id, Título, Descripción, Fecha_Vencimiento, Prioridad
-        FROM GESTION
-        WHERE Prioridad = ?
-        LIMIT 5;
-        """
-        
-        cursor.execute(query, (filtro_Tarea,))
-        registros = cursor.fetchall()
-        
-        if registros:  # Verificamos si hay registros
-            for i, registro in enumerate(registros, start=1):  # Iteramos sobre los registros y los enumeramos (enumerate) iniciando en 1
-                _id, Título, Descripción, Fecha_de_Vencimiento, Prioridad = registro
-                
-                # Agrega aquí los campos que deseas mostrar
-                print(f'\n Registro {i}:')
-                print(f'  ID: {_id}')
-                print(f'  Título: {Título}')
-                print(f'  Descripción: {Descripción}')
-                print(f'  Fecha de Vencimiento: {Fecha_de_Vencimiento}')
-                print(f'  Prioridad: {Prioridad}')
-                print('-' * 20)  # límite de separación entre cada registro
+        while True:
+            filtro_Tarea = prioridadF()  # Llamamos la función de las Prioridades
             
-            # Imprimir el total de registros
-            print(f"\nTotal de registros encontrados: {len(registros)} con Prioridad: {filtro_Tarea}")
-            break  # Salir del bucle si hay registro
-        else:
-            print(f"\nNo hay tareas con prioridad asignada como: '{filtro_Tarea}'.")
-    
-    my_conexión.close()
+            if filtro_Tarea == "Sistema Cerrado..":
+                break
+            
+            query = """
+            SELECT _id, Título, Descripción, Fecha_Vencimiento, Prioridad
+            FROM GESTION
+            WHERE Prioridad = ?;
+            """
+            
+            cursor.execute(query, (filtro_Tarea,))
+            registros = cursor.fetchall()
+            
+            if registros:  # Verificamos si hay registros
+                for i, registro in enumerate(registros, start=1):  # Iteramos sobre los registros y los enumeramos (enumerate) iniciando en 1
+                    _id, Título, Descripción, Fecha_de_Vencimiento, Prioridad = registro
+                    
+                    # Agrega aquí los campos que deseas mostrar
+                    print(f'\n Registro {i}:')
+                    print(f'  ID: {_id}')
+                    print(f'  Título: {Título}')
+                    print(f'  Descripción: {Descripción}')
+                    print(f'  Fecha de Vencimiento: {Fecha_de_Vencimiento}')
+                    print(f'  Prioridad: {Prioridad}')
+                    print('-' * 20)  # límite de separación entre cada registro
+                    
+                # Imprimir el total de registros
+                print(f"\nTotal de registros encontrados: {len(registros)} con Prioridad: {filtro_Tarea}")
+                break  # Salir del bucle si hay registro
+            else:
+                print(f"\nNo hay tareas con prioridad asignada como: '{filtro_Tarea}'.")
+    finally:
+    # Cerrar el cursor y la conexión a la base de datos si están abiertos
+        if cursor:
+            cursor.close()
+        if my_conexión:
+            my_conexión.close()
 
 
 

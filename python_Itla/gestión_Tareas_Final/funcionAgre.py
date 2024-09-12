@@ -1,13 +1,15 @@
-from datetime import datetime, timedelta
-from opciones import prioridadF, categoríaF
-import sqlite3
+from datetime import datetime, timedelta # Importa las clases datetime y timedelta para trabajar con fechas, horas y diferencias de tiempo
+from opciones import prioridadF, categoríaF # Del módulo opciones.py importamos las Funciones prioridadF & categoríaF
+import sqlite3 # Importa el módulo sqlite3 para trabajar con bases de datos SQLite
 
+# Ruta donde esta alojada la DB
 ruta_db = "PythonGit\python_Itla\gestión_Tareas_Final\database\gestorTarea.db"
-# Inicialización de las variables para la conexión y el cursor
+
+# Inicialización de las variables para la conexión de la DB
 my_conexión = None
 cursor = None
 
-# Función que crea un Id único con el Año/mes/día/Hora:Minutos
+# Función que crea un Id único con el Año/mes/día/Hora:Minutos:segundos
 def genera_id():
     tiempoId = datetime.now().strftime('%y%m%d%H%M%S')
     nuevo_id = f'GT-{tiempoId}'
@@ -19,11 +21,12 @@ def agregarTarea():
     
     tareAg = {}
     
-    fech_Creada = datetime.now()
-    fech_Vence = fech_Creada + timedelta(days=30)
+    fech_Creada = datetime.now() # obtener fecha actual (Registra para el campo Fecha de Creación).
+    fech_Vence = fech_Creada + timedelta(days=30) # A la fecha creada le sumamos 30 días para obtener la fecha de vencimiento
     
     while True:
         
+        # Este control de excepciones verifica que la entrada sea un número, de lo contrario muestra un error y solicita nuevamente si no lo es.
         try:
             numTarea = int(input("\nIndique la cantidad de tareas que desea agregar. Para Salir Ingrese 0: "))
         except ValueError:
@@ -54,6 +57,7 @@ def agregarTarea():
                 
                 
                 try:
+                    
                     my_conexión = sqlite3.connect(ruta_db, timeout=10) # timeout=10 tiempo máximo de espera(en segundo) 
                     cursor = my_conexión.cursor() #Crear un cursor para ejecutar comandos SQL
                     
@@ -68,19 +72,23 @@ def agregarTarea():
                         VALUES ({signos})
                     '''
                     
-                    cursor.execute(query, valores)
-                    my_conexión.commit()
+                    cursor.execute(query, valores) # Ejecutar la consulta SQL con los valores proporcionados
+                    my_conexión.commit() # Confirmar los cambios realizados en la base de datos
+                    
                     
                     print(f"Tarea agregada con _id: {tareAg['_id']}")
                     
-                    # Contador de registros
+                    
+                    # Consultar el número total de registros
                     cursor.execute("SELECT COUNT(*) FROM GESTION")
                     total_registros = cursor.fetchone()[0]
                     print(f"Total de tareas en la base de datos: {total_registros}")
                     
                 except Exception as ex:
                     print("Error:", ex)
+                
                 finally:
+                    # Cerrar el cursor y la conexión a la base de datos si están abiertos
                     if cursor:
                         cursor.close()
                     if my_conexión:

@@ -13,7 +13,7 @@ def eliminar_registro():
         # Validación del input para asegurarse de que es un número
         
         # Consulta SQL para eliminar un registro
-        consulta = "DELETE FROM GESTION WHERE id = ?"
+        consulta = "DELETE FROM GESTION WHERE _id = ?"
         cursor.execute(consulta, (id_registro,))
         
         # Verificación si se eliminó algún registro

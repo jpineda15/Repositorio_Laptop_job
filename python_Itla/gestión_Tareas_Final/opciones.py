@@ -3,7 +3,7 @@
 def prioridadF():
     tarea_Prio = [
         'Prioridades de las Tareas: ',
-        '1. Alta',
+        '\n1. Alta',
         '2. Media',
         '3. Baja',
         '4. Crítica'

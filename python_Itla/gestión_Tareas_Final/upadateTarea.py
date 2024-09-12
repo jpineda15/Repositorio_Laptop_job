@@ -1,6 +1,5 @@
-from datetime import datetime
-from opciones import prioridadF, categoríaF, estadoF  # type: ignore
-import sqlite3
+from opciones import prioridadF, categoríaF, estadoF # Del módulo opciones.py importamos las Funciones prioridadF, categoríaF & estadoF
+import sqlite3 # Importa el módulo sqlite3 para trabajar con bases de datos SQLite
 
 # Ruta de la base de datos
 ruta_db = "PythonGit/python_Itla/gestión_Tareas_Final/database/gestorTarea.db"
@@ -10,9 +9,10 @@ my_conexión = None
 cursor = None
 
 
-# Solicitar la inserción de un valor entero por teclado y controlar el error
+# Solicitar la inserción de un valor entero por teclado 
 def controlError(mensaje):
     while True:
+        # Este control de excepciones verifica que la entrada sea un número, de lo contrario muestra un error y solicita nuevamente si no lo es.
         try:
             valor = int(input(f"\n{mensaje}"))
             return valor
@@ -62,7 +62,7 @@ def actualizarTarea():
                 print("\nPor favor ingresa una opción válida entre 1 y 6.")
                 continue
             
-            # Mapear la opción seleccionada al campo correspondiente
+            # creamos un diccionario con los campo de la DB que vamos a modificar
             campos = {
                 1: 'Título',
                 2: 'Descripción',
@@ -96,6 +96,7 @@ def actualizarTarea():
             # Consultar y mostrar el registro actualizado
             cursor.execute(consulta, (id_registro,))
             registro_actualizado = cursor.fetchone()
+            
             if registro_actualizado:
                 formato = [f"{clave}: {valor}" for clave, valor in dict(registro_actualizado).items()]
                 print('\nRegistro Actualizado:\n', '\n'.join(formato), '\n')
@@ -104,6 +105,7 @@ def actualizarTarea():
     except Exception as ex:
         print("Error:", ex)
     finally:
+    # Cerrar el cursor y la conexión a la base de datos si están abiertos
         if cursor:
             cursor.close()
         if my_conexión:
