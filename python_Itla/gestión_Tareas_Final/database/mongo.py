@@ -8,10 +8,10 @@ try:
         my_conexion = sqlite3.connect(db_path)
         cursor = my_conexion.cursor()
         cursor.execute('''
-                CREATE TABLE IF NOT EXISTS gestion (
+                CREATE TABLE IF NOT EXISTS GESTION (
                     _id TEXT PRIMARY KEY,
                     Título TEXT,
-                    Descripcion TEXT,
+                    Descripción TEXT,
                     Fecha_Vencimiento DATE,
                     Prioridad TEXT,
                     Categoría TEXT,

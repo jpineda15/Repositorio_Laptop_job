@@ -1,23 +1,15 @@
-from datetime import datetime, timedelta # Importamos la clase datetime & timedelta
-from pymongo import MongoClient  # Importar el cliente de MongoDB para conectarse al servidor
-from opciones import prioridadF, categoríaF # type: ignore
+from datetime import datetime, timedelta
+from opciones import prioridadF, categoríaF
 import sqlite3
 
-try:
-    my_conexion = sqlite3.connect("database/gestiorTarea")
-except Exception as ex:
-    print(ex)
+ruta_db = "PythonGit\python_Itla\gestión_Tareas_Final\database\gestorTarea.db"
+# Inicialización de las variables para la conexión y el cursor
+my_conexión = None
+cursor = None
 
-# Conexión a MongoDB
-client = MongoClient('mongodb://localhost:27017') # Conectar al servidor de MongoDB
-db = client['Gestión_de_Tareas'] # Seleccionar la base de datos
-dbTabla = db['TablaGESTION'] # Seleccionar la colección(Tabla)
-
-
-
-# Función que crea un Id unció con la Año/mes/dia/Hora:Minutos
+# Función que crea un Id único con el Año/mes/día/Hora:Minutos
 def genera_id():
-    tiempoId = datetime.now().strftime('%y%m%d%H%M')
+    tiempoId = datetime.now().strftime('%y%m%d%H%M%S')
     nuevo_id = f'GT-{tiempoId}'
     return nuevo_id
 
@@ -27,8 +19,8 @@ def agregarTarea():
     
     tareAg = {}
     
-    fech_Creada = datetime.now() # Obtenemos la Fecha de Creación de la tarea
-    fech_Vence = fech_Creada + timedelta(days=30) # Obtenemos la Fecha en la que se vence la tarea (OJO realizar condición que cambie a estado terminado si se cumple esta fecha)
+    fech_Creada = datetime.now()
+    fech_Vence = fech_Creada + timedelta(days=30)
     
     while True:
         
@@ -40,21 +32,17 @@ def agregarTarea():
         
         if numTarea > 0: 
             
-            for c in range(0, numTarea): # iterar la variable iniciando en 0 
+            for c in range(numTarea):
                 
-                print("\n ---Agregando Nueva Tareas---")
+                print("\n ---Agregando Nueva Tarea---")
                 
-                nom_Tarea = input("\n Título de la Tarea: ").lower() # Ingresar titulo de la tarea
-                
-                desc_Tarea = input("\nIngrese una Breve descripción de la Tarea: ").lower() # Ingresar una descripción de la tarea
-                
-                prio_Tarea = prioridadF() # Llamos la funcion de las Prioridades
-                
-                cate_Tarea = categoríaF() # Llamos la fucion de las Característica
-                
+                nom_Tarea = input("\n Título de la Tarea: ").title()
+                desc_Tarea = input("\nIngrese una Breve descripción de la Tarea: ").title()
+                prio_Tarea = prioridadF()
+                cate_Tarea = categoríaF()
                 
                 tareAg = {
-                    '_id' : genera_id(),
+                    '_id': genera_id(),
                     'Título': nom_Tarea,
                     'Descripción': desc_Tarea,
                     'Fecha_Vencimiento': fech_Vence.strftime('%Y-%m-%d %H:%M:%S'),
@@ -62,13 +50,41 @@ def agregarTarea():
                     'Categoría': cate_Tarea, 
                     'Estado': 'Pendiente', 
                     'Fecha_Creación': fech_Creada.strftime('%Y-%m-%d %H:%M:%S')
-                } 
+                }
                 
-                try: # Se maneja cualquier error que pueda surgir en el proceso de insertar el Id 
-                    dbTabla.insert_one(tareAg)
-                    print(f'\nDocumento insertado con ID específico: {tareAg["_id"]}')
-                except Exception as e:
-                    print(f'\nError al insertar documento: {e}')
+                
+                try:
+                    my_conexión = sqlite3.connect(ruta_db, timeout=10) # timeout=10 tiempo máximo de espera(en segundo) 
+                    cursor = my_conexión.cursor() #Crear un cursor para ejecutar comandos SQL
+                    
+                    #Preparar los nombres de las columnas y los valores para la inserción
+                    columnas = ', '.join(tareAg.keys())
+                    signos = ', '.join('?' * len(tareAg))
+                    valores = tuple(tareAg.values())
+                    
+                    #Construcción de la consulta SQL de inserción
+                    query = f'''
+                        INSERT INTO GESTION ({columnas})
+                        VALUES ({signos})
+                    '''
+                    
+                    cursor.execute(query, valores)
+                    my_conexión.commit()
+                    
+                    print(f"Tarea agregada con _id: {tareAg['_id']}")
+                    
+                    # Contador de registros
+                    cursor.execute("SELECT COUNT(*) FROM GESTION")
+                    total_registros = cursor.fetchone()[0]
+                    print(f"Total de tareas en la base de datos: {total_registros}")
+                    
+                except Exception as ex:
+                    print("Error:", ex)
+                finally:
+                    if cursor:
+                        cursor.close()
+                    if my_conexión:
+                        my_conexión.close()
             
         elif numTarea == 0:
             print("Saliendo...")
@@ -76,17 +92,3 @@ def agregarTarea():
             break
         else:
             print("\nEl número ingresado no es una opción válida. Intenta nuevamente.")
-
-
-
-"""
-1- id_contador: Variable global que se usa para asignar un ID único a cada tarea.
-2- global id_contador: Se declara dentro de la función para modificar la variable global.
-3- tareAg[id_contador]: Utiliza id_contador como clave en el diccionario para asegurar que cada tarea tenga un ID único.
-4- id_contador += 1: Incrementa el contador después de agregar una tarea.
-"""
-
-"""
-    datetime -->Esta clase se utiliza para manejar fechas y horas. Proporciona métodos para obtener la fecha y hora actual.
-    timedelta -->Esta clase representa una duración o diferencia entre dos fechas o tiempos. Se utiliza para realizar operaciones aritméticas con fechas y horas, como sumar o restar días, horas, minutos, segundos, etc., a un objeto datetime.
-"""

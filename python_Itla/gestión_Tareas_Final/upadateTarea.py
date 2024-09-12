@@ -1,78 +1,112 @@
-from pymongo import MongoClient  # Importar el cliente de MongoDB para conectarse al servidor
 from datetime import datetime
-from opciones import prioridadF, categoríaF # type: ignore
+from opciones import prioridadF, categoríaF, estadoF  # type: ignore
+import sqlite3
 
-# Conexión a MongoDB
-client = MongoClient('mongodb://localhost:27017') # Conectar al servidor de MongoDB
-db = client['Gestión_de_Tareas'] # Seleccionar la base de datos
-dbTabla = db['TablaGESTION'] # Seleccionar la colección(Tabla)
+# Ruta de la base de datos
+ruta_db = "PythonGit/python_Itla/gestión_Tareas_Final/database/gestorTarea.db"
 
+# Inicialización de las variables para la conexión y el cursor
+my_conexión = None
+cursor = None
+
+
+# Solicitar la inserción de un valor entero por teclado y controlar el error
+def controlError(mensaje):
+    while True:
+        try:
+            valor = int(input(f"\n{mensaje}"))
+            return valor
+        except ValueError:
+            print("Por favor ingresa un número válido.")
 
 
 def actualizarTarea():
-    # Realizar una búsqueda
-    id_registro = input("\n Ingrese el número de ID GT-: ")
-    #id_registro = f"GT-{numero_adicional}" 
-    
-    busca = {'_id': id_registro}
-    resultado = dbTabla.find(busca)
-    
-    for documento in resultado:
-        formato = [f"{clave}: {valor}" for clave, valor in documento.items()]
-        formato = '\n'.join(formato)
-        print('\n', formato, '\n')
-    
-    print("\n Que campo desea actualizar.")
-    myOption = [
-        '1. Título',
-        '2. Descripción',
-        '3. Fecha de Vencimiento',
-        '4. Categoría',
-        '5. Prioridad',
-        '6. Estado'
-    ]
-    print('\n','\n'.join(myOption))
-    
-    while True:
-        try:
-            updateOpt = int(input("\nSelecciona una opción (1-6). Para Salir Ingrese 0: "))
-        except ValueError:
-            print("\nPor favor ingresa un número válido.")
-            continue
+    try:
+        # Conectar a la base de datos con un timeout de 10 segundos
+        my_conexión = sqlite3.connect(ruta_db, timeout=10)
+        my_conexión.row_factory = sqlite3.Row
+        cursor = my_conexión.cursor()
         
-        if updateOpt == 1:
-            campo = 'Título'
-            newVolor = input(f"Ingrese el nuevo valor para {campo}: ")
-            actuli = {'$set': {campo: newVolor}}
-            resultado = dbTabla.update_one(busca, actuli)
-            
-        elif updateOpt == 2:
-            campo = 'Descripción'
-            newVolor = input(f"Ingrese el nuevo valor para {campo}: ")
-            actuli = {'$set': {campo: newVolor}}
-            resultado = dbTabla.update_one(busca, actuli)
-            
-        elif updateOpt == 3:
-            campo = 'Fecha de Vencimiento'
-            newValor = input(f"Ingrese la nueva fecha y hora para '{campo}' en formato YYYY-MM-DD HH:MM:SS: ")
-            try:
-                newH = datetime.strptime(newValor, '%Y-%m-%d %H:%M:%S')
-            except ValueError:
-                print("Formato de fecha y hora inválido. Por favor use YYYY-MM-DD HH:MM:SS.")
-                return
-            actuli = {'$set': {campo: newH}}
-            
-        elif updateOpt == 4:
-            valor = categoríaF() # Llamos la fucion de las Característica
-            campo = 'Categoría'
-            
-            actuli = {'$set': {campo: valor}} # Crea el diccionario de actualización
-            resultado = dbTabla.update_one(busca, actuli)
-            
-        resultado = dbTabla.find(busca)
+        id_registro = input("\nIngrese el número de ID GT-: ")
+        
+        # Consulta para obtener los registros
+        consulta = "SELECT * FROM GESTION WHERE _id = ?"
+        cursor.execute(consulta, (id_registro,))
+        resultado = cursor.fetchall()
+        
+        
+        # Formatear y mostrar los resultados como diccionarios
         for documento in resultado:
-            formato = [f"{clave}: {valor}" for clave, valor in documento.items()]
-            formato = '\n'.join(formato)
-            print('\n Vista actualizada: \n', formato, '\n')
-        break
-#actualizarTarea()
+            formato = [f"{clave}: {valor}" for clave, valor in dict(documento).items()]
+            print('\n', '\n'.join(formato), '\n')
+        
+        print("\nQué campo desea actualizar.")
+        miOption = [
+            '1. Título',
+            '2. Descripción',
+            '3. Fecha_Vencimiento',
+            '4. Categoría',
+            '5. Prioridad',
+            '6. Estado'
+        ]
+        print('\n', '\n'.join(miOption))
+        
+        while True:
+            updateOpt = controlError("Selecciona una opción (1-6). Para Salir Ingrese 0: ")
+            
+            if updateOpt == 0:
+                print("Saliendo...")
+                break
+            
+            if updateOpt < 1 or updateOpt > 6:
+                print("\nPor favor ingresa una opción válida entre 1 y 6.")
+                continue
+            
+            # Mapear la opción seleccionada al campo correspondiente
+            campos = {
+                1: 'Título',
+                2: 'Descripción',
+                3: 'Fecha_Vencimiento',
+                4: 'Categoría',
+                5: 'Prioridad',
+                6: 'Estado'
+            }
+            
+            campo = campos[updateOpt]
+            
+            # Solicitar nuevo valor según el campo seleccionado
+            if updateOpt == 1:
+                new_valor = input(f"Ingrese el nuevo valor para {campo}: ")
+            elif updateOpt == 2:
+                new_valor = input(f"Ingrese el nuevo valor para {campo}: ")
+            elif updateOpt == 3:
+                new_valor = input(f"Ingrese el nuevo valor para {campo} (YYYY-MM-DD HH:MM:SS): ")
+            elif updateOpt == 4:
+                new_valor = categoríaF()
+            elif updateOpt == 5:
+                new_valor = prioridadF()
+            elif updateOpt == 6:
+                new_valor = estadoF()
+            
+            # Actualizar el registro en la base de datos
+            sql_update = f"UPDATE GESTION SET {campo} = ? WHERE _id = ?"
+            cursor.execute(sql_update, (new_valor, id_registro))
+            my_conexión.commit()
+            
+            # Consultar y mostrar el registro actualizado
+            cursor.execute(consulta, (id_registro,))
+            registro_actualizado = cursor.fetchone()
+            if registro_actualizado:
+                formato = [f"{clave}: {valor}" for clave, valor in dict(registro_actualizado).items()]
+                print('\nRegistro Actualizado:\n', '\n'.join(formato), '\n')
+            break
+    
+    except Exception as ex:
+        print("Error:", ex)
+    finally:
+        if cursor:
+            cursor.close()
+        if my_conexión:
+            my_conexión.close()
+
+#GT-240911152230

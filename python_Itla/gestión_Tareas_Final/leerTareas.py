@@ -1,72 +1,107 @@
-from pymongo import MongoClient  # Importar el cliente de MongoDB para conectarse al servidor
 from opciones import prioridadF, categoríaF # type: ignore
+import sqlite3
+
+# Ruta de la base de datos
+ruta_db = "PythonGit/python_Itla/gestión_Tareas_Final/database/gestorTarea.db"
+
+# Inicialización de las variables para la conexión y el cursor
+my_conexión = None
+cursor = None
 
 
-# Conexión a MongoDB
-client = MongoClient('mongodb://localhost:27017') # Conectar al servidor de MongoDB
-db = client['Gestión_de_Tareas'] # Seleccionar la base de datos
-dbTabla = db['TablaGESTION'] # Seleccionar la colección(Tabla)
 
 def vistaGeneral():
-    # Limita los resultados a 5 registros desde la base de datos
-    vista = dbTabla.find().limit(5)
-    for a, ver in enumerate(vista, start=1):
-        # Obtiene los valores de cada registro, con "N/A" como valor predeterminado si la clave no existe
-        _id = ver.get('_id', 'N/A')
-        nombre = ver.get('Título', 'N/A')
-        descripcion = ver.get('Descripción', 'N/A')
-        fechaFin = ver.get('Fecha de Vencimiento', 'N/A')
-        prioridad = ver.get('Prioridad', 'N/A')
-        categoría = ver.get('Categoría', 'N/A')
-        estado = ver.get('Estado', 'N/A')
-        fechCrea = ver.get('Fecha de Creación', 'N/A')
+    # Conectar a la base de datos SQLite
+    my_conexión = sqlite3.connect(ruta_db, timeout=10)
+    my_conexión.row_factory = sqlite3.Row # Acceso a resultados por nombre de columna
+    cursor = my_conexión.cursor()
+    
+    
+    # Consulta SQL para obtener los primeros 5 registros de la tabla
+    consulta = "SELECT _id, Título, Descripción, Fecha_Vencimiento, Prioridad, Categoría, Estado, Fecha_Creación FROM GESTION LIMIT 5"
+    
+    try:
+        cursor.execute(consulta)
+        registros = cursor.fetchall()
+        
+        # Iterar sobre los resultados y mostrarlos formateados
+        for a, ver in enumerate(registros, start=1):
+            _id = ver[0] if ver[0] is not None else 'N/A'
+            Título = ver[1] if ver[1] is not None else 'N/A'
+            Descripción = ver[2] if ver[2] is not None else 'N/A'
+            FechaFin = ver[3] if ver[3] is not None else 'N/A'
+            Prioridad = ver[4] if ver[4] is not None else 'N/A'
+            Categoría = ver[5] if ver[5] is not None else 'N/A'
+            Estado = ver[6] if ver[6] is not None else 'N/A'
+            FechCrea = ver[7] if ver[7] is not None else 'N/A'
+            
+            print(f'\nRegistro {a}:')
+            print(f'  ID: {_id}')
+            print(f'  Título: {Título}')
+            print(f'  Descripción: {Descripción}')
+            print(f'  Fecha_Vencimiento: {FechaFin}')
+            print(f'  Prioridad: {Prioridad}')
+            print(f'  Categoría: {Categoría}')
+            print(f'  Estado: {Estado}')
+            print(f'  Fecha_Creación: {FechCrea}')
+            print('-' * 20)
+            
+        print("\nVista de los 5 primeros Registros.")
+    except sqlite3.Error as e:
+        print(f"Error al consultar en la base de datos: {e}")
+    finally:
+        # Cerrar la conexión
+        my_conexión.close()
 
-        # Imprime la información formateada
-        print(f'\nRegistro {a}:')
-        print(f'  ID: {_id}')
-        print(f'  Título: {nombre}')
-        print(f'  Descripción: {descripcion}')
-        print(f'  Fecha de Vencimiento: {fechaFin}')
-        print(f'  Prioridad: {prioridad}')
-        print(f'  Prioridad: {categoría}')
-        print(f'  Prioridad: {estado}')
-        print(f'  Prioridad: {fechCrea}')
-        print('-' * 20)
-    print("\n Vista de los 05 Primeros Registros. ")
 
 
-
-# Imprimir registro almacenado
 def mostrar_registros():
+    
     vistaGeneral()
     
+    # Conectar a la base de datos SQLite
+    my_conexión = sqlite3.connect(ruta_db, timeout=10)
+    my_conexión.row_factory = sqlite3.Row
+    cursor = my_conexión.cursor()
+    
     while True:
-        filtro_Tarea = prioridadF() # Llamos la funcion de las Prioridades
         
-        if filtro_Tarea == "Sisteme Cerrado..":
+        filtro_Tarea = prioridadF()  # Llamamos la función de las Prioridades
+        
+        if filtro_Tarea == "Sistema Cerrado..":
             break
-        registros = list(dbTabla.find({'Prioridad': filtro_Tarea}).limit(5)) # Consultamso la Prioridad selecionada 
         
-        if len(registros) > 0: # Verificamos si hay registros
-            for i, registro in enumerate(registros, start=1): # iteramos sobre los registro y los enumeramos (enumerate) iniciando en 1
-                
-                # Realizamos la busqueda de los registro deseado (get) y si no se encuentra lo sustituye con (N/A)
-                id_ = registro.get('_id', 'N/A')
-                nombre = registro.get('Título', 'N/A')
-                descripción = registro.get('Descripción', 'N/A')
-                fechaFin = registro.get('Fecha de Vencimiento', 'N/A')
-                prioridad = registro.get('Prioridad', 'N/A')
+        query = """
+        SELECT _id, Título, Descripción, Fecha_Vencimiento, Prioridad
+        FROM GESTION
+        WHERE Prioridad = ?
+        LIMIT 5;
+        """
+        
+        cursor.execute(query, (filtro_Tarea,))
+        registros = cursor.fetchall()
+        
+        if registros:  # Verificamos si hay registros
+            for i, registro in enumerate(registros, start=1):  # Iteramos sobre los registros y los enumeramos (enumerate) iniciando en 1
+                _id, Título, Descripción, Fecha_de_Vencimiento, Prioridad = registro
                 
                 # Agrega aquí los campos que deseas mostrar
                 print(f'\n Registro {i}:')
-                print(f'  ID: {id_}')
-                print(f'  Título: {nombre}')
-                print(f'  Descripción: {descripción}')
-                print(f'  Fecha de Vencimiento: {fechaFin}')
-                print(f'  Prioridad: {prioridad}')
-                # Imprime otros campos aquí si es necesario
-                print('-' * 20) # limite de separacion entre cad registro
-            break # Salir del bucle si hay registro
+                print(f'  ID: {_id}')
+                print(f'  Título: {Título}')
+                print(f'  Descripción: {Descripción}')
+                print(f'  Fecha de Vencimiento: {Fecha_de_Vencimiento}')
+                print(f'  Prioridad: {Prioridad}')
+                print('-' * 20)  # límite de separación entre cada registro
+            
+            # Imprimir el total de registros
+            print(f"\nTotal de registros encontrados: {len(registros)} con Prioridad: {filtro_Tarea}")
+            break  # Salir del bucle si hay registro
         else:
-            print(f"\n No hay tareas con prioridad asignada como: '{filtro_Tarea}'.")
+            print(f"\nNo hay tareas con prioridad asignada como: '{filtro_Tarea}'.")
+    
+    my_conexión.close()
+
+
+
 

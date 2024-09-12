@@ -1,6 +1,7 @@
 from funcionAgre import agregarTarea
 from leerTareas import mostrar_registros
 from upadateTarea import actualizarTarea
+from eliminar_Tareas import eliminar_registro
 
 def menuInicio():
     menu = [
@@ -24,15 +25,13 @@ def menuInicio():
         
         
         if opción == 1:
-            agregarTarea() # Funcion para agregar Tarea
+            agregarTarea() # Funcion para agregar Tarea | OK
         elif opción == 2:
-            mostrar_registros() # Leer y filtrar tarea almacenada 
+            mostrar_registros() # Leer y filtrar tarea almacenada | OK
         elif opción == 3:
-            actualizarTarea()
+            actualizarTarea() # Funcion para actualizar (update) a los registro | OK
         elif opción == 4:
-            pass  # Función que consulte el listado de tareas
-        elif opción == 5:
-            pass  # Función que borre tarea existente
+            eliminar_registro()
         elif opción == 0:
             print("Saliendo del programa...")
             return 'Sistema Cerrado..'

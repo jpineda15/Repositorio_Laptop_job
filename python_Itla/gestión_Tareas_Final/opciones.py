@@ -27,7 +27,7 @@ def prioridadF():
             return 'Crítica'
         elif prio == 0:
             print("Saliendo...")
-            return "Sisteme Cerrado.."
+            return "Sistema Cerrado.."
             break
         else:
             print("\nEl número ingresado no es una opción válida. Intenta nuevamente.")
@@ -68,7 +68,7 @@ def categoríaF():
             return 'Salud'
         elif cate == 0:
             print("Saliendo...")
-            return "Sisteme Cerrado.."
+            return "Sistema Cerrado.."
             break
         else:
             print("\nEl número ingresado no es una opción válida. Intenta nuevamente.")
@@ -107,7 +107,7 @@ def estadoF():
             return 'Pendiente'
         elif statu == 0:
             print("Saliendo...")
-            return "Sisteme Cerrado.."
+            return "Sistema Cerrado.."
             break
         else:
             print("\nEl número ingresado no es una opción válida. Intenta nuevamente.")
